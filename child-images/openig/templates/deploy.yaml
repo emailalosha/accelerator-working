@@ -1,0 +1,65 @@
+#
+# Legal Notice: Installation and use of this script is subject to 
+# a license agreement with Midships Limited (a company registered 
+# in England, under company registration number: 11324587).
+# This script cannot be modified or shared with another organisation 
+# unless approved in writing by Midships Limited.
+# You as a user of this script must review, accept and comply with the 
+# license terms of each downloaded/installed package that is referenced 
+# by this script. By proceeding with the installation, you are accepting 
+# the license terms of each package, and acknowledging that your use of 
+# each package will be subject to its respective license terms.
+#=======================================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.openig.pod_name | quote }}
+  namespace: {{ .Values.openig.namespace }}
+spec:
+  selector:
+    matchLabels: 
+      app: {{ .Values.openig.pod_name | quote }}
+  replicas: {{ .Values.openig.replicas }}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: {{ .Values.openig.pod_name | quote }}
+    spec:
+      containers:
+      - env:
+        - name: CATALINA_OPTS
+          value: -Xmx512m
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: MY_POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
+        image: {{ .Values.openig.image | quote }}
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /openig/ping
+            port: 8080
+          periodSeconds: 30
+          timeoutSeconds: 10
+        name: openig
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            path: /openig/ping
+            port: 8080
+          initialDelaySeconds: 5
+        resources:
+          requests:
+            cpu: 200m
+            memory: 512Mi
+        volumeMounts: null
+      volumes:
+      - emptyDir: {}
+        name: logs

@@ -1,0 +1,130 @@
+#
+# Legal Notice: Installation and use of this script is subject to 
+# a license agreement with Midships Limited (a company registered 
+# in England, under company registration number: 11324587).
+# This script cannot be modified or shared with another organisation 
+# unless approved in writing by Midships Limited.
+# You as a user of this script must review, accept and comply with the 
+# license terms of each downloaded/installed package that is referenced 
+# by this script. By proceeding with the installation, you are accepting 
+# the license terms of each package, and acknowledging that your use of 
+# each package will be subject to its respective license terms.
+#=======================================================================
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.idm.pod_name | quote }}
+  namespace: {{ .Values.idm.namespace }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.idm.pod_name | quote }}
+  replicas: {{ .Values.idm.replicas }}
+  serviceName: {{ .Values.idm.service_name | quote }}
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: "false"
+      labels:
+        app: {{ .Values.idm.pod_name | quote }}
+    spec:
+      securityContext:
+        runAsUser: 10002
+        runAsGroup: 10002
+        fsGroup: 10002
+      volumes:
+        {{- if eq (lower .Values.idm.secrets_mode | quote) ("k8s" | quote) }}
+        - name: configmaps-idm
+          configMap:
+            name: {{ .Values.idm.pod_name | quote }}
+        - name: secrets-idm
+          secret:
+            secretName: {{ .Values.idm.pod_name | quote }}
+        - name: secrets-us
+          secret:
+            secretName: {{ .Values.userstore.pod_name | quote }}
+        {{- end }}
+      containers:
+      - name: idm
+        image: {{ .Values.idm.image | quote }}
+        imagePullPolicy: Always
+        volumeMounts:
+          {{- if eq (lower .Values.idm.secrets_mode | quote) ("k8s" | quote) }}
+          - name: configmaps-idm
+            mountPath: /opt/idm/configmaps # do NOT change
+          - name: secrets-idm
+            mountPath: /opt/idm/secrets # do NOT change
+          - name: secrets-us
+            mountPath: /opt/us/secrets # do NOT change
+          {{- end }}
+        livenessProbe:
+          httpGet:
+            httpHeaders:
+            - name: X-OpenIDM-Username
+              value: anonymous
+            - name: X-OpenIDM-Password
+              value: anonymous
+            - name: Accept-API-Version
+              value: "resource=1.0"
+            - name: X-OpenIDM-NoSession
+              value: "true"
+            path: /openidm/info/ping
+            port: 8080
+          initialDelaySeconds: 120
+          periodSeconds: 60
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: X-OpenIDM-Username
+              value: anonymous
+            - name: X-OpenIDM-Password
+              value: anonymous
+            - name: Accept-API-Version
+              value: "resource=1.0"
+            - name: X-OpenIDM-NoSession
+              value: "true"
+            path: /openidm/info/ping
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 2Gi
+          requests:
+            cpu: 250m
+            memory: 1Gi
+        env:
+          - name: DS_HOSTNAME_PRIMARY
+            value: {{ .Values.idm.ds_hostname_primary | quote }}
+          - name: DS_HOSTNAME_SECONDARY
+            value: {{ .Values.idm.ds_hostname_secondary | quote }}
+          - name: IDM_PROFILE
+            value: {{ .Values.idm.idm_profile | default "ds" | quote }}
+          - name: ENV_TYPE
+            value: {{ .Values.idm.env_type | default "SIT" | quote }}
+            # Recommended vaules are SIT, UAT, NFT, PRE_PROD, PROD
+          - name: VAULT_BASE_URL
+            value: {{ .Values.vault.url | quote }}
+          - name: VAULT_TOKEN
+            value: {{ .Values.vault.token | quote }}
+          - name: VAULT_CLIENT_PATH_IDM
+            value: {{ .Values.vault.rs_path | quote }}
+          - name: SECRETS_MODE
+            value: {{ .Values.idm.secrets_mode | default "k8s" | quote }}
+            # Accepted values 'k8s' or 'REST'. Former where secrets and config are stored in K8s, later in a REST secrets manager.
+          - name: NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        - name: https
+          containerPort: 8443
+          protocol: TCP
+      imagePullSecrets:
+      - name: fr-nexus-docker

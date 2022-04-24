@@ -1,0 +1,41 @@
+#
+# Legal Notice: Installation and use of this script is subject to 
+# a license agreement with Midships Limited (a company registered 
+# in England, under company registration number: 11324587).
+# This script cannot be modified or shared with another organisation 
+# unless approved in writing by Midships Limited.
+# You as a user of this script must review, accept and comply with the 
+# license terms of each downloaded/installed package that is referenced 
+# by this script. By proceeding with the installation, you are accepting 
+# the license terms of each package, and acknowledging that your use of 
+# each package will be subject to its respective license terms.
+#=======================================================================
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.tokenstore.service_name | quote }}
+  namespace: {{ .Values.tokenstore.namespace | quote }}
+  labels:
+    app: {{ .Values.tokenstore.pod_name | quote }}
+spec:
+  clusterIP: None
+  selector:
+    app: {{ .Values.tokenstore.pod_name | quote }}
+  ports:
+  - name: ldaps
+    port: 1636
+    targetPort: 1636
+    protocol: TCP
+  - name: https
+    port: 8443
+    targetPort: 8443
+    protocol: TCP
+  - name: admin
+    port: 4444
+    targetPort: 4444
+    protocol: TCP
+  - name: replication
+    port: 8989
+    targetPort: 8989
+    protocol: TCP

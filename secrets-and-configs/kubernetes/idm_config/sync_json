@@ -1,0 +1,130 @@
+{
+    "mappings" : [
+        {
+            "target" : "managed/user",
+            "source" : "system/csvCustomerData/Account",
+            "name" : "customerAccounts_managedUser",
+            "displayName" : "Customer Accounts (CSV) > Managed User",
+            "properties" : [
+                {
+                    "target" : "mail",
+                    "source" : "customerEmail"
+                },
+                {
+                    "target" : "sn",
+                    "source" : "rmName"
+                },
+                {
+                    "target" : "givenName",
+                    "source" : "rmName"
+                },
+                {
+                    "target" : "userName",
+                    "source" : "__NAME__"
+                },
+                {
+                    "target" : "externalId",
+                    "source" : "__NAME__"
+                },
+                {
+                    "target" : "mobileNumber",
+                    "source" : "mobileNumber"
+                },
+                {
+                    "target" : "customerEmail",
+                    "source" : "customerEmail"
+                },
+                {
+                    "target" : "gbName1",
+                    "source" : "gbName1"
+                },
+                {
+                    "target" : "gbName2",
+                    "source" : "gbName2"
+                },
+                {
+                    "target" : "onlineBanking",
+                    "source" : "onlineBanking"
+                },
+                {
+                    "target" : "rmName",
+                    "source" : "rmName"
+                },
+                {
+                    "target" : "aumSegment",
+                    "source" : "aumSegment"
+                },
+                {
+                    "target" : "personType",
+                    "source" : "personType"
+                },
+                {
+                    "target" : "jointCustomers",
+                    "source" : "jointCustomers"
+                },
+                {
+                    "target" : "_id",
+                    "source" : "__NAME__"
+                }
+            ],
+            "policies" : [
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "AMBIGUOUS"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "SOURCE_MISSING"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "MISSING"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "FOUND_ALREADY_LINKED"
+                },
+                {
+                    "action" : "DELETE",
+                    "situation" : "UNQUALIFIED"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "UNASSIGNED"
+                },
+                {
+                    "action" : "EXCEPTION",
+                    "situation" : "LINK_ONLY"
+                },
+                {
+                    "action" : "IGNORE",
+                    "situation" : "TARGET_IGNORED"
+                },
+                {
+                    "action" : "IGNORE",
+                    "situation" : "SOURCE_IGNORED"
+                },
+                {
+                    "action" : "IGNORE",
+                    "situation" : "ALL_GONE"
+                },
+                {
+                    "action" : "UPDATE",
+                    "situation" : "CONFIRMED"
+                },
+                {
+                    "action" : "UPDATE",
+                    "situation" : "FOUND"
+                },
+                {
+                    "action" : "CREATE",
+                    "situation" : "ABSENT"
+                }
+            ],
+            "linkQualifiers" : [
+                "default"
+            ],
+            "prefetchLinks" : false
+        }
+    ]
+}

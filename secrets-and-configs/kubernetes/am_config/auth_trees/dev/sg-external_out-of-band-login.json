@@ -1,0 +1,319 @@
+
+{
+  "origin": "5f2173bcbe5765149f186b4e3117ab5b",
+  "innernodes": {
+    "70c95a50-1b0d-4e96-b840-b34f44e07d89": {
+      "_id": "70c95a50-1b0d-4e96-b840-b34f44e07d89",
+      "hiddenCollectorId": "deviceType",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "e52e52b1-5def-4c06-8c1a-f1279ed0186f": {
+      "_id": "e52e52b1-5def-4c06-8c1a-f1279ed0186f",
+      "hiddenCollectorId": "location",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "fbd7445d-a593-4307-a29b-3d3ebabeda64": {
+      "_id": "fbd7445d-a593-4307-a29b-3d3ebabeda64",
+      "messageKeys": {
+        "notificationReject": "notificationReject"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "9960429f-2113-4687-89ab-081056d2fede": {
+      "_id": "9960429f-2113-4687-89ab-081056d2fede",
+      "messageKeys": {
+        "primarydeviceInactive": "primarydeviceInactive"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "013884e5-f04f-48fa-af77-3bb44b2f14aa": {
+      "_id": "013884e5-f04f-48fa-af77-3bb44b2f14aa",
+      "pageHeader": {},
+      "pageDescription": {},
+      "stage": "out-of-bound-login-send-notification",
+      "nodes": [
+        {
+          "_id": "70c95a50-1b0d-4e96-b840-b34f44e07d89",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "e52e52b1-5def-4c06-8c1a-f1279ed0186f",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        }
+      ],
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "0ac8e92d-3ced-4b74-bf16-90fe7dbc5b26": {
+      "_id": "0ac8e92d-3ced-4b74-bf16-90fe7dbc5b26",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "fbd7445d-a593-4307-a29b-3d3ebabeda64",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "out-of-bound-notification-rejected",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "1d7b2cb5-1bd9-4a31-bc67-b6b574fe25c8": {
+      "_id": "1d7b2cb5-1bd9-4a31-bc67-b6b574fe25c8",
+      "pageHeader": {},
+      "pageDescription": {},
+      "stage": "primary-device-in-active",
+      "nodes": [
+        {
+          "_id": "9960429f-2113-4687-89ab-081056d2fede",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "9edca26f-dc97-4832-b6da-6d95c88987b6": {
+      "_id": "9edca26f-dc97-4832-b6da-6d95c88987b6",
+      "tree": "register-soft-token",
+      "_type": {
+        "_id": "InnerTreeEvaluatorNode",
+        "name": "Inner Tree Evaluator",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "true",
+          "displayName": "True"
+        },
+        {
+          "id": "false",
+          "displayName": "False"
+        }
+      ]
+    },
+    "db607b9d-4916-43a7-a89c-0b66e10e9860": {
+      "_id": "db607b9d-4916-43a7-a89c-0b66e10e9860",
+      "maxRetriesLimit": 2,
+      "softTokenServiceBaseUrl": "ciam.softTokenUrl",
+      "expireSeconds": 100,
+      "softTokenTrustAllCerts": true,
+      "queryStatusIntervalMs": 500,
+      "notificationTrustAllCerts": true,
+      "notificationServiceBaseURL": "ciam.notificationURL",
+      "retryIntervalSeconds": 20,
+      "overMaxRetriesMsg": "overRetryTimes",
+      "resendSuspendMsg": "resendSuspend",
+      "_type": {
+        "_id": "OutOfBoundNotificationNode",
+        "name": "CIAM Out Of Bound Notification",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "REJECT",
+          "displayName": "Reject"
+        },
+        {
+          "id": "TIMEOUT",
+          "displayName": "timeout"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        },
+        {
+          "id": "OFFLINE_OTP",
+          "displayName": "Offline OTP"
+        }
+      ]
+    },
+    "ffd12e89-409f-46f8-a758-38f6587be78e": {
+      "_id": "ffd12e89-409f-46f8-a758-38f6587be78e",
+      "_type": {
+        "_id": "CheckUserSoftTokenNode",
+        "name": "CIAM Check User Soft Token",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "ACTIVATED",
+          "displayName": "ACTIVATED"
+        },
+        {
+          "id": "UNREGISTERED",
+          "displayName": "UNREGISTERED"
+        },
+        {
+          "id": "INACTIVE",
+          "displayName": "INACTIVE"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    }
+  },
+  "scripts": {},
+  "emailTemplates": {},
+  "tree": {
+    "_id": "out-of-band-login",
+    "entryNodeId": "ffd12e89-409f-46f8-a758-38f6587be78e",
+    "staticNodes": {
+      "startNode": {
+        "x": 50,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 1334,
+        "y": 102
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 1265,
+        "y": 410
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "ffd12e89-409f-46f8-a758-38f6587be78e": {
+        "displayName": "CIAM Check User Soft Token",
+        "nodeType": "CheckUserSoftTokenNode",
+        "x": 210,
+        "y": 169,
+        "connections": {
+          "ACTIVATED": "013884e5-f04f-48fa-af77-3bb44b2f14aa",
+          "UNREGISTERED": "9edca26f-dc97-4832-b6da-6d95c88987b6",
+          "INACTIVE": "1d7b2cb5-1bd9-4a31-bc67-b6b574fe25c8",
+          "FAILURE": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "db607b9d-4916-43a7-a89c-0b66e10e9860": {
+        "displayName": "CIAM Out Of Bound Notification",
+        "nodeType": "OutOfBoundNotificationNode",
+        "x": 805,
+        "y": 30,
+        "connections": {
+          "SUCCESS": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0",
+          "REJECT": "0ac8e92d-3ced-4b74-bf16-90fe7dbc5b26",
+          "TIMEOUT": "db607b9d-4916-43a7-a89c-0b66e10e9860",
+          "FAILURE": "e301438c-0bd0-429c-ab0c-66126501069a",
+          "OFFLINE_OTP": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "0ac8e92d-3ced-4b74-bf16-90fe7dbc5b26": {
+        "displayName": "notification rejected",
+        "nodeType": "PageNode",
+        "x": 1086,
+        "y": 218,
+        "connections": {
+          "outcome": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "9edca26f-dc97-4832-b6da-6d95c88987b6": {
+        "displayName": "register-soft-token",
+        "nodeType": "InnerTreeEvaluatorNode",
+        "x": 636,
+        "y": 274,
+        "connections": {
+          "true": "e301438c-0bd0-429c-ab0c-66126501069a",
+          "false": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "1d7b2cb5-1bd9-4a31-bc67-b6b574fe25c8": {
+        "displayName": "primary device inactive",
+        "nodeType": "PageNode",
+        "x": 600,
+        "y": 416,
+        "connections": {
+          "outcome": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "013884e5-f04f-48fa-af77-3bb44b2f14aa": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 520,
+        "y": 45,
+        "connections": {
+          "outcome": "db607b9d-4916-43a7-a89c-0b66e10e9860"
+        }
+      }
+    }
+  }
+}

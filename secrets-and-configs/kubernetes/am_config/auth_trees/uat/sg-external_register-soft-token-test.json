@@ -1,0 +1,782 @@
+
+{
+  "origin": "05a1bc101cf7a81dea91512508742768",
+  "innernodes": {
+    "63275946-d65b-4783-a293-23051746fa58": {
+      "_id": "63275946-d65b-4783-a293-23051746fa58",
+      "hiddenCollectorId": "softTokenPlatformFingerprint",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "df701856-0dd8-4c97-a5ab-9c0434e9c935": {
+      "_id": "df701856-0dd8-4c97-a5ab-9c0434e9c935",
+      "messageKeys": {
+        "softTokenMac": "",
+        "softTokenEncryptedData": "",
+        "softTokenServerEvidenceMessage": "",
+        "softTokenEncryptionCounter": "",
+        "softTokenServerTime": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "c0462a56-40d8-430f-b886-927c4276acc1": {
+      "_id": "c0462a56-40d8-430f-b886-927c4276acc1",
+      "messageKeys": {
+        "registerStatus": "failed"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "10c29559-64aa-4788-a54b-f96b4ee75674": {
+      "_id": "10c29559-64aa-4788-a54b-f96b4ee75674",
+      "hiddenCollectorId": "softTokenClientPublicKey",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "0c7b6d88-53be-4243-aa2c-3ec11650588a": {
+      "_id": "0c7b6d88-53be-4243-aa2c-3ec11650588a",
+      "hiddenCollectorId": "softTokenClientEvidenceMessage",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "bbfa2d9b-0249-42fe-a6da-e9a227b374c9": {
+      "_id": "bbfa2d9b-0249-42fe-a6da-e9a227b374c9",
+      "messageKeys": {
+        "softTokenServerPublicKey": "",
+        "softTokenUserPassword": "",
+        "softTokenSalt": "",
+        "softTokenServerTime": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "6c59c98c-7376-49d5-84c6-b8263882de48": {
+      "_id": "6c59c98c-7376-49d5-84c6-b8263882de48",
+      "messageKeys": {
+        "registerStatus": "success",
+        "softTokenServerTime": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "add8d118-a74e-499f-9601-44111eeb2be2": {
+      "_id": "add8d118-a74e-499f-9601-44111eeb2be2",
+      "hiddenCollectorId": "softTokenSignature",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "db22f101-a4a3-471c-a367-7d4aa43db66f": {
+      "_id": "db22f101-a4a3-471c-a367-7d4aa43db66f",
+      "hiddenCollectorId": "softTokenInstanceBlobIndex",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "5e87d487-3e92-4d06-8c00-42189934c151": {
+      "_id": "5e87d487-3e92-4d06-8c00-42189934c151",
+      "messageKeys": {
+        "softTokenMac": "",
+        "softTokenEncryptedData": "",
+        "softTokenServerEvidenceMessage": "",
+        "softTokenEncryptionCounter": "",
+        "softTokenServerTime": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "03a4a902-844b-47c9-9a81-68398f54d710": {
+      "_id": "03a4a902-844b-47c9-9a81-68398f54d710",
+      "hiddenCollectorId": "otpEnabled",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "5adbc921-7237-480a-b0e5-15efa5ad586d": {
+      "_id": "5adbc921-7237-480a-b0e5-15efa5ad586d",
+      "hiddenCollectorId": "createdPinCode",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "069089f5-7a86-461b-bfe6-ad20502ed178": {
+      "_id": "069089f5-7a86-461b-bfe6-ad20502ed178",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "63275946-d65b-4783-a293-23051746fa58",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "df701856-0dd8-4c97-a5ab-9c0434e9c935",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "mobile-key-license",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "0d03dd59-bbd9-46fa-b6d2-1698f5395b41": {
+      "_id": "0d03dd59-bbd9-46fa-b6d2-1698f5395b41",
+      "softTokenServiceBaseUrl": "ciam.softTokenUrl",
+      "allowedCharacters": "0123456789",
+      "passwordLength": 6,
+      "trustAllCerts": true,
+      "_type": {
+        "_id": "InitialiseSoftTokenNode",
+        "name": "CIAM SoftToken Initialise",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "0d99ffb5-6191-41fb-bbef-42f97160d1c7": {
+      "_id": "0d99ffb5-6191-41fb-bbef-42f97160d1c7",
+      "outcomes": [
+        "true",
+        "false"
+      ],
+      "inputs": [
+        "*"
+      ],
+      "script": "f582715d-e9e8-411b-928e-c88f603aa5a6",
+      "outputs": [
+        "*"
+      ],
+      "_type": {
+        "_id": "ScriptedDecisionNode",
+        "name": "Scripted Decision",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "true",
+          "displayName": "true"
+        },
+        {
+          "id": "false",
+          "displayName": "false"
+        }
+      ]
+    },
+    "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c": {
+      "_id": "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "c0462a56-40d8-430f-b886-927c4276acc1",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "register-mobile-key-failed",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "2111e0ed-6668-4316-be66-2f47a82424d8": {
+      "_id": "2111e0ed-6668-4316-be66-2f47a82424d8",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "10c29559-64aa-4788-a54b-f96b4ee75674",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "0c7b6d88-53be-4243-aa2c-3ec11650588a",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "bbfa2d9b-0249-42fe-a6da-e9a227b374c9",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "mobile-key-initialise",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "37475957-9c94-4187-a687-4cb5048afc29": {
+      "_id": "37475957-9c94-4187-a687-4cb5048afc29",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "6c59c98c-7376-49d5-84c6-b8263882de48",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "register-mobile-key-success",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "43d6c7e7-85d3-4b85-b024-a6c41d3c7275": {
+      "_id": "43d6c7e7-85d3-4b85-b024-a6c41d3c7275",
+      "outputs": [
+        "*"
+      ],
+      "outcomes": [
+        "true",
+        "false"
+      ],
+      "inputs": [
+        "*"
+      ],
+      "script": "b18e42a4-ec5c-4e10-af42-652f61d50a12",
+      "_type": {
+        "_id": "ScriptedDecisionNode",
+        "name": "Scripted Decision",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "true",
+          "displayName": "true"
+        },
+        {
+          "id": "false",
+          "displayName": "false"
+        }
+      ]
+    },
+    "57ef07ee-7eb5-49ef-affc-8f89a3fe68c0": {
+      "_id": "57ef07ee-7eb5-49ef-affc-8f89a3fe68c0",
+      "allDevelopmentUsers": [
+        "softtoken029",
+        "xinyuan002"
+      ],
+      "_type": {
+        "_id": "FlowControlNode",
+        "name": "Flow Control Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "REGULAR FLOW",
+          "displayName": "Regular flow"
+        },
+        {
+          "id": "DEVELOPMENT FLOW",
+          "displayName": "Development flow"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "65acfeaf-d7f3-4255-9857-2f8f94de0a09": {
+      "_id": "65acfeaf-d7f3-4255-9857-2f8f94de0a09",
+      "softTokenServiceBaseUrl": "ciam.softTokenUrl",
+      "trustAllCerts": true,
+      "_type": {
+        "_id": "InstanceActivationNode",
+        "name": "CIAM SoftToken Instance Activation",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "67c606d0-0c96-4995-9064-1ed7f0494a3a": {
+      "_id": "67c606d0-0c96-4995-9064-1ed7f0494a3a",
+      "softTokenServiceBaseUrl": "ciam.softTokenUrl",
+      "trustAllCerts": true,
+      "_type": {
+        "_id": "LicenseActivationNode",
+        "name": "CIAM SoftToken License Activation",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "6a79fdd6-e745-4b18-b808-2076eacfe365": {
+      "_id": "6a79fdd6-e745-4b18-b808-2076eacfe365",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "add8d118-a74e-499f-9601-44111eeb2be2",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "db22f101-a4a3-471c-a367-7d4aa43db66f",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "5e87d487-3e92-4d06-8c00-42189934c151",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "mobile-key-instance",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "83d2a81e-899b-4b6c-8a5d-9649fef7052d": {
+      "_id": "83d2a81e-899b-4b6c-8a5d-9649fef7052d",
+      "softTokenServiceBaseUrl": "ciam.softTokenUrl",
+      "trustAllCerts": true,
+      "_type": {
+        "_id": "SignatureVerificationNode",
+        "name": "CIAM SoftToken Signature Verification",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "a3985472-4bb9-438a-98c0-c6a4808ce1a3": {
+      "_id": "a3985472-4bb9-438a-98c0-c6a4808ce1a3",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "03a4a902-844b-47c9-9a81-68398f54d710",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        }
+      ],
+      "stage": "register-mobile-key",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "c2d38209-e449-487c-b386-364df541e055": {
+      "_id": "c2d38209-e449-487c-b386-364df541e055",
+      "tree": "subtree-sms-otp",
+      "_type": {
+        "_id": "InnerTreeEvaluatorNode",
+        "name": "Inner Tree Evaluator",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "true",
+          "displayName": "True"
+        },
+        {
+          "id": "false",
+          "displayName": "False"
+        }
+      ]
+    },
+    "d99960b9-7d32-4ce7-8f19-572d00285ac4": {
+      "_id": "d99960b9-7d32-4ce7-8f19-572d00285ac4",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "5adbc921-7237-480a-b0e5-15efa5ad586d",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        }
+      ],
+      "stage": "created-pin-code",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "f582715d-e9e8-411b-928e-c88f603aa5a6": {
+      "_id": "f582715d-e9e8-411b-928e-c88f603aa5a6",
+      "name": "CIAM Created PinCode Check",
+      "description": "null",
+      "script": "LyoKICAtIERhdGEgbWFkZSBhdmFpbGFibGUgYnkgbm9kZXMgdGhhdCBoYXZlIGFscmVhZHkgZXhlY3V0ZWQgYXJlIGF2YWlsYWJsZSBpbiB0aGUgc2hhcmVkU3RhdGUgdmFyaWFibGUuCiAgLSBUaGUgc2NyaXB0IHNob3VsZCBzZXQgb3V0Y29tZSB0byBlaXRoZXIgInRydWUiIG9yICJmYWxzZSIuCiAqLwoKb3V0Y29tZSA9IHNoYXJlZFN0YXRlLmdldCgiY3JlYXRlZFBpbkNvZGUiKTs=",
+      "default": false,
+      "language": "JAVASCRIPT",
+      "context": "AUTHENTICATION_TREE_DECISION_NODE",
+      "createdBy": "null",
+      "creationDate": 0,
+      "lastModifiedBy": "null",
+      "lastModifiedDate": 0
+    },
+    "b18e42a4-ec5c-4e10-af42-652f61d50a12": {
+      "_id": "b18e42a4-ec5c-4e10-af42-652f61d50a12",
+      "name": "CIAM Send OTP Check",
+      "description": "null",
+      "script": "LyoKICAtIERhdGEgbWFkZSBhdmFpbGFibGUgYnkgbm9kZXMgdGhhdCBoYXZlIGFscmVhZHkgZXhlY3V0ZWQgYXJlIGF2YWlsYWJsZSBpbiB0aGUgc2hhcmVkU3RhdGUgdmFyaWFibGUuCiAgLSBUaGUgc2NyaXB0IHNob3VsZCBzZXQgb3V0Y29tZSB0byBlaXRoZXIgInRydWUiIG9yICJmYWxzZSIuCiAqLwp2YXIgb3RwRW5hYmxlZCA9IHNoYXJlZFN0YXRlLmdldCgib3RwRW5hYmxlZCIpOwppZiAob3RwRW5hYmxlZCA9PSAndHJ1ZScpIHsKCW91dGNvbWUgPSAidHJ1ZSI7Cn0gZWxzZSB7CiAgb3V0Y29tZSA9ICJmYWxzZSI7Cn0=",
+      "default": false,
+      "language": "JAVASCRIPT",
+      "context": "AUTHENTICATION_TREE_DECISION_NODE",
+      "createdBy": "null",
+      "creationDate": 0,
+      "lastModifiedBy": "null",
+      "lastModifiedDate": 0
+    }
+  },
+  "emailTemplates": {},
+  "tree": {
+    "_id": "register-soft-token-test",
+    "entryNodeId": "a3985472-4bb9-438a-98c0-c6a4808ce1a3",
+    "staticNodes": {
+      "startNode": {
+        "x": 20,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 1487,
+        "y": 207
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 1337,
+        "y": 21
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "a3985472-4bb9-438a-98c0-c6a4808ce1a3": {
+        "displayName": "register-mobile-key",
+        "nodeType": "PageNode",
+        "x": 154,
+        "y": 20,
+        "connections": {
+          "outcome": "43d6c7e7-85d3-4b85-b024-a6c41d3c7275"
+        }
+      },
+      "43d6c7e7-85d3-4b85-b024-a6c41d3c7275": {
+        "displayName": "Send OTP?",
+        "nodeType": "ScriptedDecisionNode",
+        "x": 429,
+        "y": 23,
+        "connections": {
+          "true": "c2d38209-e449-487c-b386-364df541e055",
+          "false": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "c2d38209-e449-487c-b386-364df541e055": {
+        "displayName": "OTP Flow",
+        "nodeType": "InnerTreeEvaluatorNode",
+        "x": 609,
+        "y": 20,
+        "connections": {
+          "true": "d99960b9-7d32-4ce7-8f19-572d00285ac4",
+          "false": "a3985472-4bb9-438a-98c0-c6a4808ce1a3"
+        }
+      },
+      "0d03dd59-bbd9-46fa-b6d2-1698f5395b41": {
+        "displayName": "CIAM SoftToken Initialise",
+        "nodeType": "InitialiseSoftTokenNode",
+        "x": 29,
+        "y": 207,
+        "connections": {
+          "SUCCESS": "2111e0ed-6668-4316-be66-2f47a82424d8",
+          "FAILURE": "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c"
+        }
+      },
+      "65acfeaf-d7f3-4255-9857-2f8f94de0a09": {
+        "displayName": "CIAM SoftToken Instance Activation",
+        "nodeType": "InstanceActivationNode",
+        "x": 599,
+        "y": 200,
+        "connections": {
+          "SUCCESS": "6a79fdd6-e745-4b18-b808-2076eacfe365",
+          "FAILURE": "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c"
+        }
+      },
+      "67c606d0-0c96-4995-9064-1ed7f0494a3a": {
+        "displayName": "CIAM SoftToken License Activation",
+        "nodeType": "LicenseActivationNode",
+        "x": 281,
+        "y": 210,
+        "connections": {
+          "SUCCESS": "57ef07ee-7eb5-49ef-affc-8f89a3fe68c0",
+          "FAILURE": "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c"
+        }
+      },
+      "83d2a81e-899b-4b6c-8a5d-9649fef7052d": {
+        "displayName": "CIAM SoftToken Signature Verification",
+        "nodeType": "SignatureVerificationNode",
+        "x": 906,
+        "y": 211,
+        "connections": {
+          "SUCCESS": "37475957-9c94-4187-a687-4cb5048afc29",
+          "FAILURE": "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c"
+        }
+      },
+      "2111e0ed-6668-4316-be66-2f47a82424d8": {
+        "displayName": "mobile-key-initialise",
+        "nodeType": "PageNode",
+        "x": 218,
+        "y": 412,
+        "connections": {
+          "outcome": "67c606d0-0c96-4995-9064-1ed7f0494a3a"
+        }
+      },
+      "069089f5-7a86-461b-bfe6-ad20502ed178": {
+        "displayName": "mobile-key-license",
+        "nodeType": "PageNode",
+        "x": 531,
+        "y": 409,
+        "connections": {
+          "outcome": "65acfeaf-d7f3-4255-9857-2f8f94de0a09"
+        }
+      },
+      "6a79fdd6-e745-4b18-b808-2076eacfe365": {
+        "displayName": "mobile-key-instance",
+        "nodeType": "PageNode",
+        "x": 846,
+        "y": 402,
+        "connections": {
+          "outcome": "83d2a81e-899b-4b6c-8a5d-9649fef7052d"
+        }
+      },
+      "37475957-9c94-4187-a687-4cb5048afc29": {
+        "displayName": "register-mobile-key-success",
+        "nodeType": "PageNode",
+        "x": 1231,
+        "y": 208,
+        "connections": {
+          "outcome": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        }
+      },
+      "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c": {
+        "displayName": "register-mobile-key-failed",
+        "nodeType": "PageNode",
+        "x": 572,
+        "y": 699,
+        "connections": {
+          "outcome": "0d03dd59-bbd9-46fa-b6d2-1698f5395b41"
+        }
+      },
+      "0d99ffb5-6191-41fb-bbef-42f97160d1c7": {
+        "displayName": "Created PinCode?",
+        "nodeType": "ScriptedDecisionNode",
+        "x": 985,
+        "y": 24,
+        "connections": {
+          "true": "0d03dd59-bbd9-46fa-b6d2-1698f5395b41",
+          "false": "a3985472-4bb9-438a-98c0-c6a4808ce1a3"
+        }
+      },
+      "d99960b9-7d32-4ce7-8f19-572d00285ac4": {
+        "displayName": "created-pin-code",
+        "nodeType": "PageNode",
+        "x": 759,
+        "y": 25,
+        "connections": {
+          "outcome": "0d99ffb5-6191-41fb-bbef-42f97160d1c7"
+        }
+      },
+      "57ef07ee-7eb5-49ef-affc-8f89a3fe68c0": {
+        "displayName": "Xinyuan test",
+        "nodeType": "FlowControlNode",
+        "x": 306,
+        "y": 676,
+        "connections": {
+          "REGULAR FLOW": "069089f5-7a86-461b-bfe6-ad20502ed178",
+          "DEVELOPMENT FLOW": "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c",
+          "FAILURE": "1f14e90f-ca48-49d7-9ecc-9adfe8815c9c"
+        }
+      }
+    }
+  }
+}

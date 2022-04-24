@@ -1,0 +1,2 @@
+create Realms --global --body '{"name":"sg-external","active":true,"parentPath":"/","aliases":[ ]}'
+create Realms --global --body '{"name":"sg-internal","active":true,"parentPath":"/","aliases":[ ]}'

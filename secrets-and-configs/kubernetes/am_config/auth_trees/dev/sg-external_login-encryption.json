@@ -1,0 +1,321 @@
+
+{
+  "origin": "05a1bc101cf7a81dea91512508742768",
+  "innernodes": {
+    "b7de34b7-ce97-4f7a-b7ee-3613fa115fc3": {
+      "_id": "b7de34b7-ce97-4f7a-b7ee-3613fa115fc3",
+      "hiddenCollectorId": "EncryptedUsername",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "cfb7e613-028a-4b37-baf6-24e925dd916e": {
+      "_id": "cfb7e613-028a-4b37-baf6-24e925dd916e",
+      "hiddenCollectorId": "EncryptedPassword",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "cedd896d-1f4a-4720-8484-9c94c9548a66": {
+      "_id": "cedd896d-1f4a-4720-8484-9c94c9548a66",
+      "hiddenCollectorId": "SecurityNonce",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "d8b7b3c1-d173-492d-af89-b968f71059af": {
+      "_id": "d8b7b3c1-d173-492d-af89-b968f71059af",
+      "hiddenCollectorId": "softTokenPlatform",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "7c4a528e-535b-427d-8750-c0807e528b96": {
+      "_id": "7c4a528e-535b-427d-8750-c0807e528b96",
+      "hiddenCollectorId": "softTokenDigiSequenceNum",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "5815df84-8042-4ce1-a8a4-0242bcf31543": {
+      "_id": "5815df84-8042-4ce1-a8a4-0242bcf31543",
+      "messageKeys": {
+        "rsa-key": "",
+        "security-nonce": "",
+        "rsa-key-for-username": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "c090ad33-fdb8-45aa-bcc7-b846b4d2be85": {
+      "_id": "c090ad33-fdb8-45aa-bcc7-b846b4d2be85",
+      "properties": {
+        "scb-loginTime": "scb-loginTime-shared"
+      },
+      "_type": {
+        "_id": "ReadProfilePropertyNode",
+        "name": "CIAM Read Profile Property",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "8492912e-5c16-4940-96ae-b6b804b41aaf": {
+      "_id": "8492912e-5c16-4940-96ae-b6b804b41aaf",
+      "properties": {
+        "scb-transactionHash": "",
+        "scb-loginTime": "$date",
+        "scb-lastLoginTime": "scb-loginTime-shared"
+      },
+      "addAttributes": false,
+      "transientProperties": {},
+      "_type": {
+        "_id": "SaveProfilePropertyNode",
+        "name": "CIAM Save Profile Property",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "6e52e5e9-46ce-46ea-80c1-529a152c9d17": {
+      "_id": "6e52e5e9-46ce-46ea-80c1-529a152c9d17",
+      "webhookName": "customer-logout-webhook",
+      "_type": {
+        "_id": "RegisterLogoutWebhookNode",
+        "name": "Register Logout Webhook",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "6208a81d-fe0c-4f1f-9b55-c409142734b6": {
+      "_id": "6208a81d-fe0c-4f1f-9b55-c409142734b6",
+      "trustSecurityNonce": false,
+      "trustAllCerts": true,
+      "isUsernameEncrypted": true,
+      "cryptoServiceBaseUrl": "ciam.cryptoURL",
+      "lockoutCounter": 3,
+      "_type": {
+        "_id": "LdapAuthenticatorNode",
+        "name": "CIAM LDAP Authenticator",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "INVALID_PASSWORD",
+          "displayName": "Invalid Password"
+        },
+        {
+          "id": "LOCKED",
+          "displayName": "Locked"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "f4520cb5-dfef-4f19-821a-4d41c137474b": {
+      "_id": "f4520cb5-dfef-4f19-821a-4d41c137474b",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "b7de34b7-ce97-4f7a-b7ee-3613fa115fc3",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "cfb7e613-028a-4b37-baf6-24e925dd916e",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "cedd896d-1f4a-4720-8484-9c94c9548a66",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "d8b7b3c1-d173-492d-af89-b968f71059af",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "7c4a528e-535b-427d-8750-c0807e528b96",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "5815df84-8042-4ce1-a8a4-0242bcf31543",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "login-credential",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "f50e5c86-163a-4614-80f8-67b0228a9777": {
+      "_id": "f50e5c86-163a-4614-80f8-67b0228a9777",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "c090ad33-fdb8-45aa-bcc7-b846b4d2be85",
+          "nodeType": "ReadProfilePropertyNode",
+          "displayName": "CIAM Read Profile Property"
+        },
+        {
+          "_id": "8492912e-5c16-4940-96ae-b6b804b41aaf",
+          "nodeType": "SaveProfilePropertyNode",
+          "displayName": "CIAM Save Profile Property"
+        },
+        {
+          "_id": "6e52e5e9-46ce-46ea-80c1-529a152c9d17",
+          "nodeType": "RegisterLogoutWebhookNode",
+          "displayName": "Register Logout Webhook"
+        }
+      ],
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "scripts": {},
+  "emailTemplates": {},
+  "tree": {
+    "_id": "login-encryption",
+    "entryNodeId": "f4520cb5-dfef-4f19-821a-4d41c137474b",
+    "staticNodes": {
+      "startNode": {
+        "x": 50,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 1247,
+        "y": 230
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 1164,
+        "y": 611
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "f4520cb5-dfef-4f19-821a-4d41c137474b": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 209,
+        "y": 152,
+        "connections": {
+          "outcome": "6208a81d-fe0c-4f1f-9b55-c409142734b6"
+        }
+      },
+      "6208a81d-fe0c-4f1f-9b55-c409142734b6": {
+        "displayName": "CIAM LDAP Authenticator",
+        "nodeType": "LdapAuthenticatorNode",
+        "x": 454,
+        "y": 281,
+        "connections": {
+          "SUCCESS": "f50e5c86-163a-4614-80f8-67b0228a9777",
+          "FAILURE": "e301438c-0bd0-429c-ab0c-66126501069a",
+          "LOCKED": "e301438c-0bd0-429c-ab0c-66126501069a",
+          "INVALID_PASSWORD": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "f50e5c86-163a-4614-80f8-67b0228a9777": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 887,
+        "y": 121,
+        "connections": {
+          "outcome": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        }
+      }
+    }
+  }
+}

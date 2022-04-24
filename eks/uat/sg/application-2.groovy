@@ -1,0 +1,6 @@
+env.ACCOUNT_ID="964199720479"
+env.EKS_CLUSTER="cpbb-ciam-prod-ap-southeast-1-eks-01"
+env.NAMESPACE="application-2"
+env.ADUSER="zone1-scbnet\\svc.1277.sgsapp.001"
+env.ROLE="eks-ap-southeast-1-dp-app"
+env.REGION="ap-southeast-1"

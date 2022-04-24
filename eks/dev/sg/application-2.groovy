@@ -1,0 +1,7 @@
+env.ACCOUNT_ID="253466514013"
+env.EKS_CLUSTER="cpbb-ciam-nonprod-ap-southeast-1-eks-01"
+env.NAMESPACE="application-2"
+env.ADUSER="zone1-scbnet\\svc.ciam1.sgdapp.002"
+env.ROLE="eks-ap-southeast-1-dp-app"
+env.REGION="ap-southeast-1"
+env.PROJECT_NAME="forgerock-accelerator"

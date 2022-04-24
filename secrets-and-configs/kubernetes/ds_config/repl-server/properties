@@ -1,0 +1,8 @@
+httpPort=8080
+rootUserDN='cn=Root User'
+httpsPort=8443
+adminConnectorPort=4444
+replicationPort=8989
+replicationAdminUID=admin
+diskLowThreshold=10GB
+diskFullThreshold=5GB

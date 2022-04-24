@@ -1,0 +1,154 @@
+
+{
+  "origin": "05a1bc101cf7a81dea91512508742768",
+  "innernodes": {
+    "55ec238c-74d2-4079-952f-44a570a5a359": {
+      "_id": "55ec238c-74d2-4079-952f-44a570a5a359",
+      "profileAttributes": {
+        "scb-loginTime": "loginTime",
+        "scb-logoutTime": "logoutTime",
+        "scb-lastLoginTime": "lastLoginTime"
+      },
+      "_type": {
+        "_id": "ShowUserAttributes",
+        "name": "CIAM Show User Attributes",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "40fa47e3-9385-4d18-a325-a45ee7a84d7f": {
+      "_id": "40fa47e3-9385-4d18-a325-a45ee7a84d7f",
+      "addAttributes": false,
+      "transientProperties": {},
+      "properties": {
+        "scb-logoutTime": "$date"
+      },
+      "_type": {
+        "_id": "SaveProfilePropertyNode",
+        "name": "CIAM Save Profile Property",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "5fdd33a4-9768-4fbd-905e-965f033c6ffb": {
+      "_id": "5fdd33a4-9768-4fbd-905e-965f033c6ffb",
+      "logoutUserSSOToken": true,
+      "userNameHeaderName": "username",
+      "oauth2ClientIds": [
+        "frog-oauth2-public-mobile-app",
+        "frog-oauth2-public-web-app"
+      ],
+      "logoutSecretHeaderName": "logout_secret",
+      "amCookieName": "iPlanetDirectoryPro",
+      "amAPIVersionHeader": "resource=2.0,protocol=1.0",
+      "webHookName": "customer-logout-webhook",
+      "amURL": "ciam.amURL.context",
+      "_type": {
+        "_id": "OIDCLogoutNode",
+        "name": "CIAM OIDC Logout",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        },
+        {
+          "id": "USER_NOT_FOUND",
+          "displayName": "User Not Found"
+        }
+      ]
+    },
+    "d37e0c01-2006-48b9-9804-d4c636deb8d6": {
+      "_id": "d37e0c01-2006-48b9-9804-d4c636deb8d6",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "55ec238c-74d2-4079-952f-44a570a5a359",
+          "nodeType": "ShowUserAttributes",
+          "displayName": "CIAM Show User Attributes"
+        }
+      ],
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "scripts": {},
+  "emailTemplates": {},
+  "tree": {
+    "_id": "customer-logout",
+    "entryNodeId": "5fdd33a4-9768-4fbd-905e-965f033c6ffb",
+    "staticNodes": {
+      "startNode": {
+        "x": 50,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 729,
+        "y": 47
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 314,
+        "y": 161
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "5fdd33a4-9768-4fbd-905e-965f033c6ffb": {
+        "displayName": "CIAM OIDC Logout",
+        "nodeType": "OIDCLogoutNode",
+        "x": 135,
+        "y": 44,
+        "connections": {
+          "USER_NOT_FOUND": "e301438c-0bd0-429c-ab0c-66126501069a",
+          "FAILURE": "e301438c-0bd0-429c-ab0c-66126501069a",
+          "SUCCESS": "40fa47e3-9385-4d18-a325-a45ee7a84d7f"
+        }
+      },
+      "40fa47e3-9385-4d18-a325-a45ee7a84d7f": {
+        "displayName": "CIAM Save Profile Property",
+        "nodeType": "SaveProfilePropertyNode",
+        "x": 296,
+        "y": 57,
+        "connections": {
+          "outcome": "d37e0c01-2006-48b9-9804-d4c636deb8d6"
+        }
+      },
+      "d37e0c01-2006-48b9-9804-d4c636deb8d6": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 502,
+        "y": 20,
+        "connections": {
+          "outcome": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        }
+      }
+    }
+  }
+}

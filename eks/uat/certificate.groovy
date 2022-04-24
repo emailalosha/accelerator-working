@@ -1,0 +1,1 @@
+env.certificate_arn="arn:aws:acm:ap-southeast-1:964199720479:certificate/7b5ba6c5-1418-407a-8942-306ac2281b40"

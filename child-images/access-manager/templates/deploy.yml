@@ -1,0 +1,328 @@
+#
+# Legal Notice: Installation and use of this script is subject to 
+# a license agreement with Midships Limited (a company registered 
+# in England, under company registration number: 11324587).
+# This script cannot be modified or shared with another organisation 
+# unless approved in writing by Midships Limited.
+# You as a user of this script must review, accept and comply with the 
+# license terms of each downloaded/installed package that is referenced 
+# by this script. By proceeding with the installation, you are accepting 
+# the license terms of each package, and acknowledging that your use of 
+# each package will be subject to its respective license terms.
+#=======================================================================
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.am.pod_name | quote }}
+  # Should NOT include digits
+  namespace: {{ .Values.am.namespace | quote }}
+  labels:
+    app: {{ .Values.am.pod_name | quote }}
+spec:
+  serviceName: {{ .Values.am.service_name | quote }}
+  replicas: {{ .Values.am.replicas }}
+  selector:
+    matchLabels:
+        app: {{ .Values.am.pod_name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.am.pod_name | quote }}
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - {{ .Values.am.pod_name | quote }}
+              topologyKey: "kubernetes.io/hostname"
+      securityContext:
+        runAsUser: 10002
+        runAsGroup: 10002
+        fsGroup: 10002
+      hostAliases:
+        - ip: "127.0.0.1"
+          hostnames:
+          - "{{ .Values.am.lb_domain }}"
+      volumes:
+        - name: shared
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+        - name: tomcat
+          emptyDir: {}
+        - name: am
+          emptyDir: {}
+        - name: home-am  # the /home/am required by amester script
+          emptyDir: {}
+        - name: cs-java-truststore
+          emptyDir: {}
+        - name: am-java-truststore
+          emptyDir: {}
+        - name: ds-app
+          emptyDir: {}
+        {{- if eq (lower .Values.am.secrets_mode | quote) ("k8s" | quote) }}
+        - name: configmaps-am
+          configMap:
+            name: {{ .Values.am.pod_name | quote }}
+        - name: configmaps-cs
+          configMap:
+            name: {{ .Values.configstore.pod_name | quote }}
+        - name: secrets-am
+          secret:
+            secretName: {{ .Values.am.pod_name | quote }}
+        - name: secrets-cs
+          secret:
+            secretName: {{ .Values.configstore.pod_name | quote }}
+        - name: secrets-us
+          secret:
+            secretName: {{ .Values.userstore.pod_name | quote }}
+        - name: secrets-ts
+          secret:
+            secretName: {{ .Values.tokenstore.pod_name | quote }}
+        - name: secrets-rs
+          secret:
+            secretName: {{ .Values.replserver.pod_name | quote }}
+        {{- end }}
+      containers:
+      {{- if eq (.Values.am.cs_sidecar_mode | quote) (true | quote) }}
+      - name: {{ .Values.configstore.pod_name | quote }}
+        image: {{ .Values.configstore.image | quote }}
+        imagePullPolicy: Always
+        volumeMounts:
+          - mountPath: /opt/shared # DO NOT CHANGE
+            name: shared
+          - mountPath: /opt/ds/app
+            name: ds-app
+          - mountPath: /tmp
+            name: tmp
+          - mountPath: /etc/pki/ca-trust/extracted/java
+            name: cs-java-truststore
+          {{- if eq (lower .Values.am.secrets_mode | quote) ("k8s" | quote) }}
+          - name: configmaps-cs
+            mountPath: /opt/ds/configmaps # do NOT change
+          - name: secrets-cs
+            mountPath: /opt/ds/secrets # do NOT change
+          - name: secrets-rs
+            mountPath: /opt/rs/secrets # do NOT change
+          {{- end }}
+        resources:
+          limits:
+            memory: 1Gi
+            cpu: "500m"
+          requests:
+            memory: 1Gi
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            port: 8081
+            path: /alive
+            scheme: HTTP
+          initialDelaySeconds: 120 # how long to wait before checking
+          periodSeconds: 5 # how long to wait between checks
+          successThreshold: 2 # how many successes to hit before accepting
+          failureThreshold: 10 # how many failures to accept before failing
+          timeoutSeconds: 5 # how long to wait for a response
+        env:
+          - name: POD_BASENAME
+            value: {{ .Values.am.pod_name | quote }}
+          - name: POD_SERVICE_NAME
+            value: {{ .Values.am.service_name | quote }}
+          - name: RS_SVC
+            value: {{ .Values.configstore.rs_svc | quote }}
+            # Comma separated Replication Server (RS) domains/hostnames for replication.
+            # Only used when SELF_REPLICATE is set NOT 'true'.
+            # Format is '{hostname1}:{replication-port},{hostname2}:{replication-port}'
+          - name: CLUSTER_DOMAIN
+            value: {{ .Values.configstore.cluster_domain | quote }}
+            # Kubernetes cluster domain
+          - name: DS_BASE_DN
+            value: {{ .Values.configstore.basedn | quote }}
+            # For instance "ou=am-config"
+          - name: ENV_TYPE
+            value: {{ .Values.am.env_type | quote }}
+            # Recommended vaules are SIT, UAT, NFT, PRE_PROD, PROD
+          - name: AM_HTTPS_PORT
+            value: "8443"
+            # The HTTPS port used by the Access Manager
+          - name: SELF_REPLICATE
+            value: {{ .Values.configstore.self_replicate | quote }}
+            # Set to false when using single instance or external Replication server. Acccepted values 'true' or 'false'
+          - name: USE_CUSTOM_JAVA_PROPS
+            value: {{ .Values.configstore.use_javaProps | quote }}
+            # Use of external file for loading java properties. Acccepted values 'true' or 'false'
+          - name: DISABLE_INSECURE_COMMS
+            value: {{ .Values.configstore.disable_insecure_comms | quote }}
+            # Acccepted values 'true' or 'false'.
+          - name: SECRETS_MODE
+            value: {{ .Values.am.secrets_mode | default "k8s" | quote }}
+            # Accepted values 'k8s' or 'REST'. Former where secrets and config are stored in K8s, later in a REST secrets manager.
+          - name: SIDECAR_MODE
+            value: {{ .Values.am.cs_sidecar_mode | quote }}
+            # Set to 'true' when running as sidecar with Access Manager pod. Acccepted values 'true' or 'false'
+          - name: VAULT_BASE_URL
+            value: {{ .Values.vault.url | quote }}
+          - name: VAULT_CLIENT_PATH_CS
+            value: {{ .Values.vault.cs_path | quote }}
+          - name: VAULT_CLIENT_PATH_RS
+            value: {{ .Values.vault.rs_path | quote }}
+          - name: VAULT_TOKEN
+            value: {{ .Values.vault.token | quote }}
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+        ports:
+          - name: ldap
+            containerPort: 1390
+            protocol: TCP
+          - name: ldaps
+            containerPort: 1636
+            protocol: TCP
+          - name: admin
+            containerPort: 4445
+            protocol: TCP
+          - name: replication
+            containerPort: 8989
+            protocol: TCP
+          - name: http
+            containerPort: 8081
+            protocol: TCP
+          - name: https
+            containerPort: 8444
+            protocol: TCP
+      {{- end }}
+      - name: {{ .Values.am.pod_name | quote }}
+        image: {{ .Values.am.image | quote }}
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: shared
+            mountPath: /opt/shared # DO NOT CHANGE
+          - name: tmp
+            mountPath: /tmp
+          - name: am
+            mountPath: /opt/am # Mount the AM_HOME as empty folder, it will be populated by the files from the original AM_HOME
+          - name: home-am
+            mountPath: /home/am
+          - name: am-java-truststore
+            mountPath: /etc/pki/ca-trust/extracted/java
+          - name: tomcat
+            mountPath: /opt/tomcat # Mount the tomcat as empty folder, it will be populated by the files from the original TOMCAT_HOME
+          {{- if eq (lower .Values.am.secrets_mode | quote) ("k8s" | quote) }}
+          - name: configmaps-am
+            mountPath: /opt/am/configmaps # do NOT change
+          - name: secrets-am
+            mountPath: /opt/am/secrets # do NOT change
+          - name: secrets-cs
+            mountPath: /opt/cs/secrets # do NOT change
+          - name: secrets-us
+            mountPath: /opt/us/secrets # do NOT change
+          - name: secrets-ts
+            mountPath: /opt/ts/secrets # do NOT change
+          {{- end }}
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2000m"
+          limits:
+            cpu: "2000m"
+            memory: "2Gi"
+        readinessProbe:
+          httpGet:
+            port: 8443
+            path: /am/isAlive.jsp
+            scheme: HTTPS
+          initialDelaySeconds: 480 # Do NOT set less than 420. how long to wait before checking
+          periodSeconds: 10 # how long to wait between checks
+          successThreshold: 2 # how many successes to hit before accepting
+          failureThreshold: 20 # how many failures to accept before failing
+          timeoutSeconds: 5 # how long to wait for a response
+        env:
+          - name: AM_LB_DOMAIN
+            value: {{ .Values.am.lb_domain | quote }}
+          - name: CS_K8s_SVC_URL
+            value: {{ .Values.am.cs_k8s_svc_url | quote }}
+            # Kubernetes service URL for accessing the Confg Store. The format is <pod-service-name>.<namespace>.svc.cluster.local
+            # For instance forgerock-config-store.forgerock.svc.cluster.local
+          - name: US_K8s_SVC_URL
+            value: {{ .Values.am.us_k8s_svc_url | quote }}
+            # Kubernetes service URL for accessing the User Store. The format is <pod-service-name>.<namespace>.svc.cluster.local
+            # For instance forgerock-user-store.forgerock.svc.cluster.local
+          - name: TS_K8s_SVC_URL
+            value: {{ .Values.am.ts_k8s_svc_url | quote }}
+            # Kubernetes service URL for accessing the Token Store. The format is <pod-service-name>.<namespace>.svc.cluster.local
+            # For instance forgerock-token-store.forgerock.svc.cluster.local
+          - name: COOKIE_NAME
+            value: {{ .Values.am.cookie_name | quote }}
+          - name: GOTO_URLS
+            value: {{ .Values.am.goto_urls | quote }}
+            #Format '"https://url1.com/*","http://url2.com/profile/*","https://etc.co.uk/account/paid/*"'
+          - name: US_CONNSTRING_AFFINITY
+            value: {{ .Values.am.us_connstring_affinity | quote }}
+            # An array of strings. The format is "<pod-name>.<pod-service-name>.<namespace>.svc.cluster.local","<pod-name>.<pod-service-name>.<namespace>.svc.cluster.local"
+            # For instance "forgerock-user-store-0.forgerock-user-store.default.svc.cluster.local". "forgerock-user-store-1.forgerock-user-store.default.svc.cluster.local"
+          - name: TS_CONNSTRING_AFFINITY
+            value: {{ .Values.am.ts_connstring_affinity | quote }}
+            # A comma separated string. The format is <pod-name>.<pod-service-name>.<namespace>.svc.cluster.local,<pod-name>.<pod-service-name>.<namespace>.svc.cluster.local
+            # For instance forgerock-token-store-0.forgerock-token-store.default.svc.cluster.local,forgerock-token-store-1.forgerock-token-store.default.svc.cluster.local
+          - name: SECRETS_MODE
+            value: {{ .Values.am.secrets_mode | default "k8s" | quote }}
+            # Accepted values 'k8s' or 'REST'. Former where secrets and config are stored in K8s, later in a REST secrets manager.
+          - name: CS_SIDECAR_MODE
+            value: {{ .Values.am.cs_sidecar_mode | quote }}
+            # Set to 'true' when running as sidecar with Access Manager pod. Acccepted values 'true' or 'false'
+          - name: ENV_TYPE
+            value: {{ .Values.am.env_type | quote }}
+          - name: AMSTER_FILES
+            value: {{ .Values.am.amster_files | quote }}
+          - name: AUTH_TREES
+            value: {{ .Values.am.auth_trees | quote }}
+          - name: VAULT_CLIENT_PATH_RUNTIME_AM
+            value: {{ .Values.am.vault_client_path_runtime_am | quote }}
+          - name: VAULT_BASE_URL
+            value: {{ .Values.vault.url | quote }}
+          - name: VAULT_TOKEN
+            value: {{ .Values.vault.token | quote }}
+          - name: VAULT_CLIENT_PATH_AM
+            value: {{ .Values.vault.am_path | quote }}
+          - name: VAULT_CLIENT_PATH_CS
+            value: {{ .Values.vault.cs_path | quote }}
+          - name: VAULT_CLIENT_PATH_US
+            value: {{ .Values.vault.us_path | quote }}
+          - name: VAULT_CLIENT_PATH_TS
+            value: {{ .Values.vault.ts_path | quote }}
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          - name: UPDATE_ALL_AUTHENTICATED_USERS_REALMS
+            value: {{ .Values.am.update_all_authenticated_users_realms | quote }}
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP
+        - name: https
+          containerPort: 8443
+          protocol: TCP
+      imagePullSecrets:
+      - name: fr-nexus-docker
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: forgerock-access-manager-hpa
+  namespace: {{ .Values.am.namespace | quote }}
+spec:
+  maxReplicas: 10
+  minReplicas: {{ .Values.am.replicas }}
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: {{ .Values.am.pod_name | quote }}
+  targetCPUUtilizationPercentage: 70

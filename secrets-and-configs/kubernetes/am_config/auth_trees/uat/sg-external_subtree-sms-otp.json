@@ -1,0 +1,303 @@
+
+{
+  "origin": "05a1bc101cf7a81dea91512508742768",
+  "innernodes": {
+    "5ac11b3d-961d-4577-b107-168feabed03f": {
+      "_id": "5ac11b3d-961d-4577-b107-168feabed03f",
+      "messageKeys": {
+        "validation-error": "ciam-error-user-otp-suspending"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "6bcdaf66-bc11-4efb-8594-8c386fc363aa": {
+      "_id": "6bcdaf66-bc11-4efb-8594-8c386fc363aa",
+      "messageKeys": {
+        "validation-error": "ciam-error-user-otp-suspended",
+        "otp-lockout-time": "otp-lockout-time",
+        "otp-lockout-duration": "10800"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "47d8c28a-badb-4da7-aa40-92ddfcc0bb05": {
+      "_id": "47d8c28a-badb-4da7-aa40-92ddfcc0bb05",
+      "properties": {
+        "otpTemLockoutTIme": "otp-lockout-time"
+      },
+      "_type": {
+        "_id": "ReadProfilePropertyNode",
+        "name": "CIAM Read Profile Property",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "27094cb8-3726-438b-926b-a0fb7a316230": {
+      "_id": "27094cb8-3726-438b-926b-a0fb7a316230",
+      "messageKeys": {
+        "validation-error": "ciam-error-user-otp-resending-suspended"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "0e349db3-7cdc-4903-bbac-25e868c9e2ac": {
+      "_id": "0e349db3-7cdc-4903-bbac-25e868c9e2ac",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "5ac11b3d-961d-4577-b107-168feabed03f",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "user-otp-suspending",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "3f769dfc-ba5b-4a26-89fc-0999ab23089d": {
+      "_id": "3f769dfc-ba5b-4a26-89fc-0999ab23089d",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "6bcdaf66-bc11-4efb-8594-8c386fc363aa",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "user-otp-suspended",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "55dbae0d-a68e-4ae2-aeb8-15946a1b0a15": {
+      "_id": "55dbae0d-a68e-4ae2-aeb8-15946a1b0a15",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "47d8c28a-badb-4da7-aa40-92ddfcc0bb05",
+          "nodeType": "ReadProfilePropertyNode",
+          "displayName": "CIAM Read Profile Property"
+        }
+      ],
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "a4fbe4fd-92a7-480c-881c-d7495891aed9": {
+      "_id": "a4fbe4fd-92a7-480c-881c-d7495891aed9",
+      "otpResendTimeLimit": 20,
+      "locale": "en_US",
+      "otpTemplateSharedAttributeName": "OTP Template Name",
+      "smsOTPServiceBaseURL": "ciam.notificationURL",
+      "maxRetries": 6,
+      "configureOTPPreFixSeparator": "-",
+      "allowDummyOTP": true,
+      "configureOTPLength": 6,
+      "trustAllCerts": true,
+      "smsOTPValidityDuration": 20,
+      "lockoutDuration": 10,
+      "smsOtpWording": "Your otp code is :",
+      "configureOTPPreFixLength": 4,
+      "otpUserOperationSharedAttributeName": "OTP User operation",
+      "_type": {
+        "_id": "OTPNode",
+        "name": "CIAM SMS OTP",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "SUCCESS",
+          "displayName": "Success"
+        },
+        {
+          "id": "OUTCOME_OTP_LOCKING",
+          "displayName": "OTP Locking"
+        },
+        {
+          "id": "OUTCOME_OTP_LOCKED",
+          "displayName": "OTP Locked"
+        },
+        {
+          "id": "OUTCOME_OTP_EXPIRED",
+          "displayName": "OTP Expired"
+        },
+        {
+          "id": "OUTCOME_OTP_INVALID",
+          "displayName": "OTP Invalid"
+        },
+        {
+          "id": "OUTCOME_OTP_RESEND",
+          "displayName": "OTP Resend"
+        },
+        {
+          "id": "OUTCOME_OTP_RESENDING_SUSPENDED",
+          "displayName": "OTP Resending Suspended"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "cd5cb69f-6f3a-4666-944e-b6feee27b4c4": {
+      "_id": "cd5cb69f-6f3a-4666-944e-b6feee27b4c4",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "27094cb8-3726-438b-926b-a0fb7a316230",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "scripts": {},
+  "emailTemplates": {},
+  "tree": {
+    "_id": "subtree-sms-otp",
+    "entryNodeId": "a4fbe4fd-92a7-480c-881c-d7495891aed9",
+    "staticNodes": {
+      "startNode": {
+        "x": 50,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 965,
+        "y": 57
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 966,
+        "y": 515
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "a4fbe4fd-92a7-480c-881c-d7495891aed9": {
+        "displayName": "CIAM SMS OTP",
+        "nodeType": "OTPNode",
+        "x": 83,
+        "y": 172,
+        "connections": {
+          "SUCCESS": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0",
+          "OUTCOME_OTP_RESEND": "a4fbe4fd-92a7-480c-881c-d7495891aed9",
+          "OUTCOME_OTP_EXPIRED": "a4fbe4fd-92a7-480c-881c-d7495891aed9",
+          "OUTCOME_OTP_LOCKED": "55dbae0d-a68e-4ae2-aeb8-15946a1b0a15",
+          "OUTCOME_OTP_RESENDING_SUSPENDED": "cd5cb69f-6f3a-4666-944e-b6feee27b4c4",
+          "OUTCOME_OTP_INVALID": "a4fbe4fd-92a7-480c-881c-d7495891aed9",
+          "OUTCOME_OTP_LOCKING": "0e349db3-7cdc-4903-bbac-25e868c9e2ac",
+          "FAILURE": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "0e349db3-7cdc-4903-bbac-25e868c9e2ac": {
+        "displayName": "user-otp-suspending",
+        "nodeType": "PageNode",
+        "x": 628,
+        "y": 23,
+        "connections": {
+          "outcome": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "55dbae0d-a68e-4ae2-aeb8-15946a1b0a15": {
+        "displayName": "otp-lockout-time",
+        "nodeType": "PageNode",
+        "x": 499,
+        "y": 182,
+        "connections": {
+          "outcome": "3f769dfc-ba5b-4a26-89fc-0999ab23089d"
+        }
+      },
+      "3f769dfc-ba5b-4a26-89fc-0999ab23089d": {
+        "displayName": "user-otp-suspended",
+        "nodeType": "PageNode",
+        "x": 810,
+        "y": 187,
+        "connections": {
+          "outcome": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "cd5cb69f-6f3a-4666-944e-b6feee27b4c4": {
+        "displayName": "sms-otp-resending-suspended",
+        "nodeType": "PageNode",
+        "x": 301,
+        "y": 474,
+        "connections": {
+          "outcome": "a4fbe4fd-92a7-480c-881c-d7495891aed9"
+        }
+      }
+    }
+  }
+}

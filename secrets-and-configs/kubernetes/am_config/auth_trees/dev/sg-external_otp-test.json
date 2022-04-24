@@ -1,0 +1,320 @@
+
+{
+  "origin": "05a1bc101cf7a81dea91512508742768",
+  "innernodes": {
+    "a70ddf74-573e-4769-8024-c26df534bdad": {
+      "_id": "a70ddf74-573e-4769-8024-c26df534bdad",
+      "messageKeys": {
+        "some info": "bug"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "1fe2fbd9-b244-4ff8-8d0b-07c660889149": {
+      "_id": "1fe2fbd9-b244-4ff8-8d0b-07c660889149",
+      "hiddenCollectorId": "otpEnabled",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "bac725ec-d443-47ad-81e3-83bb4b5efb65": {
+      "_id": "bac725ec-d443-47ad-81e3-83bb4b5efb65",
+      "_type": {
+        "_id": "UsernameCollectorNode",
+        "name": "Username Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "83ff9331-2bdd-4527-ac29-f1312b927bfa": {
+      "_id": "83ff9331-2bdd-4527-ac29-f1312b927bfa",
+      "hiddenCollectorId": "EncryptedPassword",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "238881d3-d185-46d2-b7f3-87ab385fc2e8": {
+      "_id": "238881d3-d185-46d2-b7f3-87ab385fc2e8",
+      "hiddenCollectorId": "SecurityNonce",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "3205fcb2-516e-4527-a012-7315e950aea1": {
+      "_id": "3205fcb2-516e-4527-a012-7315e950aea1",
+      "messageKeys": {
+        "rsa-key": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "2cc4117d-2c61-4060-b4d3-fc9556d69429": {
+      "_id": "2cc4117d-2c61-4060-b4d3-fc9556d69429",
+      "tree": "subtree-sms-otp",
+      "_type": {
+        "_id": "InnerTreeEvaluatorNode",
+        "name": "Inner Tree Evaluator",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "true",
+          "displayName": "True"
+        },
+        {
+          "id": "false",
+          "displayName": "False"
+        }
+      ]
+    },
+    "4852ec66-68d4-415c-81e4-8f915a38b194": {
+      "_id": "4852ec66-68d4-415c-81e4-8f915a38b194",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "a70ddf74-573e-4769-8024-c26df534bdad",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "interval",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "63f95925-0f1a-4f56-9b8d-100ebea45bd4": {
+      "_id": "63f95925-0f1a-4f56-9b8d-100ebea45bd4",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "1fe2fbd9-b244-4ff8-8d0b-07c660889149",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        }
+      ],
+      "stage": "register-mobile-key",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "a0dadda0-203c-4520-908e-4e168384f986": {
+      "_id": "a0dadda0-203c-4520-908e-4e168384f986",
+      "outputs": [
+        "*"
+      ],
+      "inputs": [
+        "*"
+      ],
+      "outcomes": [
+        "true",
+        "false"
+      ],
+      "script": "b18e42a4-ec5c-4e10-af42-652f61d50a12",
+      "_type": {
+        "_id": "ScriptedDecisionNode",
+        "name": "Scripted Decision",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "true",
+          "displayName": "true"
+        },
+        {
+          "id": "false",
+          "displayName": "false"
+        }
+      ]
+    },
+    "b4a5e016-e942-4a12-b3e2-1796a6f11dfd": {
+      "_id": "b4a5e016-e942-4a12-b3e2-1796a6f11dfd",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "bac725ec-d443-47ad-81e3-83bb4b5efb65",
+          "nodeType": "UsernameCollectorNode",
+          "displayName": "Username Collector"
+        },
+        {
+          "_id": "83ff9331-2bdd-4527-ac29-f1312b927bfa",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "238881d3-d185-46d2-b7f3-87ab385fc2e8",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "3205fcb2-516e-4527-a012-7315e950aea1",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "login-credential",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "b18e42a4-ec5c-4e10-af42-652f61d50a12": {
+      "_id": "b18e42a4-ec5c-4e10-af42-652f61d50a12",
+      "name": "CIAM Send OTP Check",
+      "description": "null",
+      "script": "LyoKICAtIERhdGEgbWFkZSBhdmFpbGFibGUgYnkgbm9kZXMgdGhhdCBoYXZlIGFscmVhZHkgZXhlY3V0ZWQgYXJlIGF2YWlsYWJsZSBpbiB0aGUgc2hhcmVkU3RhdGUgdmFyaWFibGUuCiAgLSBUaGUgc2NyaXB0IHNob3VsZCBzZXQgb3V0Y29tZSB0byBlaXRoZXIgInRydWUiIG9yICJmYWxzZSIuCiAqLwp2YXIgb3RwRW5hYmxlZCA9IHNoYXJlZFN0YXRlLmdldCgib3RwRW5hYmxlZCIpOwppZiAob3RwRW5hYmxlZCA9PSAndHJ1ZScpIHsKCW91dGNvbWUgPSAidHJ1ZSI7Cn0gZWxzZSB7CiAgb3V0Y29tZSA9ICJmYWxzZSI7Cn0=",
+      "default": false,
+      "language": "JAVASCRIPT",
+      "context": "AUTHENTICATION_TREE_DECISION_NODE",
+      "createdBy": "null",
+      "creationDate": 0,
+      "lastModifiedBy": "null",
+      "lastModifiedDate": 0
+    }
+  },
+  "emailTemplates": {},
+  "tree": {
+    "_id": "otp-test",
+    "entryNodeId": "b4a5e016-e942-4a12-b3e2-1796a6f11dfd",
+    "staticNodes": {
+      "startNode": {
+        "x": 50,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 1106,
+        "y": 67
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 1016,
+        "y": 290
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "2cc4117d-2c61-4060-b4d3-fc9556d69429": {
+        "displayName": "otp-flow",
+        "nodeType": "InnerTreeEvaluatorNode",
+        "x": 726,
+        "y": 149,
+        "connections": {
+          "true": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0",
+          "false": "63f95925-0f1a-4f56-9b8d-100ebea45bd4"
+        }
+      },
+      "b4a5e016-e942-4a12-b3e2-1796a6f11dfd": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 88,
+        "y": 304,
+        "connections": {
+          "outcome": "2cc4117d-2c61-4060-b4d3-fc9556d69429"
+        }
+      },
+      "4852ec66-68d4-415c-81e4-8f915a38b194": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 511,
+        "y": 78,
+        "connections": {
+          "outcome": "2cc4117d-2c61-4060-b4d3-fc9556d69429"
+        }
+      },
+      "a0dadda0-203c-4520-908e-4e168384f986": {
+        "displayName": "Scripted Decision",
+        "nodeType": "ScriptedDecisionNode",
+        "x": 410,
+        "y": 342,
+        "connections": {
+          "true": "2cc4117d-2c61-4060-b4d3-fc9556d69429",
+          "false": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "63f95925-0f1a-4f56-9b8d-100ebea45bd4": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 175,
+        "y": 71,
+        "connections": {
+          "outcome": "a0dadda0-203c-4520-908e-4e168384f986"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,214 @@
+dn: cn=schema
+objectClass: top
+objectClass: ldapSubentry
+objectClass: subschema
+cn: schema
+attributeTypes: ( scb-encPassword-id
+  NAME 'scb-EncPassword'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-passwordChangeTime-id
+  NAME 'scb-passwordChangeTime' DESC 'User password change time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-loginTime-id
+  NAME 'scb-loginTime' DESC 'User login time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-lastLoginTime-id
+  NAME 'scb-lastLoginTime' DESC 'User last login time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-RelID
+  NAME 'scb-RelID' DESC 'User Relationship Id'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-countryCode-id
+  NAME 'scb-countryCode' DESC 'User Country Code'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-logoutTime-id
+  NAME 'scb-logoutTime' DESC 'User Login time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-segmentId-id
+  NAME 'scb-segmentId' DESC 'User Segment Id'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-segmentName-id
+  NAME 'scb-segmentName' DESC 'User Segment Name'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-customerStatusDesc-id
+  NAME 'scb-customerStatusDesc' DESC 'User Customer Status Desc'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications ) 
+attributeTypes: ( scb-customerStatusId-id
+  NAME 'scb-customerStatusId' DESC 'User Customer Status Id'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )   
+attributeTypes: ( scb-passwordHistory-id
+  NAME 'scb-passwordHistory' DESC 'User password history'
+  SYNTAX 1.3.6.1.4.1.36733.2.1.3.1
+  EQUALITY caseIgnoreJsonQueryMatch
+  ORDERING caseIgnoreOrderingMatch
+  USAGE userApplications )
+attributeTypes: ( scb-otpTempLockoutTime-id
+  NAME 'scb-otpTempLockoutTime' DESC 'User Temporary OTP lockout time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-userMigrationStatus-id
+  NAME 'scb-userMigrationStatus' DESC 'User Migration Status from Legacy BAU System'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )   
+attributeTypes: ( scb-kbaInfo-id
+  NAME 'scb-kbaInfo' DESC 'KBA of Users'
+  SYNTAX 1.3.6.1.4.1.36733.2.1.3.1
+  EQUALITY caseIgnoreJsonQueryMatch
+  ORDERING caseIgnoreOrderingMatch
+  )
+attributeTypes: ( scb-otpSendTime-id
+  NAME 'scb-otpSendTime' DESC 'User OTP Sending Time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-otpValidationAttemptTime-id
+  NAME 'scb-otpValidationAttemptTime' DESC 'User OTP Validation Attempt Time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-otpValidationStatus-id
+  NAME 'scb-otpValidationStatus' DESC 'User OTP Validation Status'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-otpUserOperation-id
+  NAME 'scb-otpUserOperation' DESC 'User OTP User Operation'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-otpFailureCounter-id
+  NAME 'scb-otpFailureCounter' DESC 'User OTP Failure Counter'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-otpUserPhone-id
+  NAME 'scb-otpUserPhone' DESC 'Users phone number where OTP was delivered'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-EBID-id
+  NAME 'scb-EBID' DESC 'Users EBID'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-inetUserStatus-id
+  NAME 'scb-inetUserStatus' DESC 'SCB inetUserStatus Supported status(Active, Inactive, Suspended, Terminated, Restricted, Expired)'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-invalidAuthAttemptsDetails-id
+  NAME 'scb-invalidAuthAttemptsDetails' DESC 'Users invalid authentication attempts'
+  SYNTAX 1.3.6.1.4.1.36733.2.1.3.1
+  EQUALITY caseIgnoreJsonQueryMatch
+  ORDERING caseIgnoreOrderingMatch
+  USAGE userApplications )
+attributeTypes: ( scb-transactionHash-id 
+  NAME 'scb-transactionHash' 
+  DESC 'Transaction Hash for 2FA+' 
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+  SINGLE-VALUE )
+attributeTypes: ( scb-firstLoginTime-id
+  NAME 'scb-firstLoginTime' DESC 'First Login time'
+  EQUALITY caseIgnoreMatch
+  ORDERING caseIgnoreOrderingMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SINGLE-VALUE
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  USAGE userApplications )
+attributeTypes: ( scb-adviceTransactionId-id 
+  NAME 'scb-adviceTransactionId' 
+  DESC 'Transaction Advice Id for 2FA+' 
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 
+  SINGLE-VALUE )
+objectClasses: ( ciamIdentity-id
+  NAME 'ciamIdentity'
+  SUP top
+  AUXILIARY
+  MAY ( scb-kbaInfo $ scb-EncPassword $ scb-passwordChangeTime $ scb-passwordHistory $ scb-loginTime $ scb-firstLoginTime $ scb-lastLoginTime $ scb-logoutTime $ scb-RelID $ scb-countryCode $ scb-segmentId $ scb-segmentName $ scb-customerStatusId  $ scb-customerStatusDesc $ scb-otpTempLockoutTime $ scb-userMigrationStatus $ scb-otpSendTime $ scb-otpValidationAttemptTime $ scb-otpValidationStatus $ scb-otpUserOperation  $ scb-otpFailureCounter $ scb-otpUserPhone $ scb-EBID $ scb-inetUserStatus $ scb-invalidAuthAttemptsDetails $ scb-transactionHash $ scb-adviceTransactionId ) )

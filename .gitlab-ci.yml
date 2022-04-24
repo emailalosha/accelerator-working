@@ -1,0 +1,164 @@
+stages:
+  - build
+  - clean-up
+  - cluster-pre-req
+  - deploy-all-components
+
+variables:
+  VAULT_BASE_URL: "https://midships-vault.vault.6ab12ea5-c7af-456f-81b5-e0aaa5c9df5e.aws.hashicorp.cloud:8200"
+  VAULT_TOKEN: "s.lvsd4kRuQmUfwY3m4glZ19km.MV86d"
+  CONFIGSTORE_VAULT_PATH: "forgerock/data/fr7/config-store"
+  USERSTORE_VAULT_PATH: "forgerock/data/fr7/user-store"
+  TOKENSTORE_VAULT_PATH: "forgerock/data/fr7/token-store"
+  REPLSERVER_VAULT_PATH: "forgerock/data/fr7/repl-server"
+  AM_VAULT_PATH: "forgerock/data/fr7/access-manager"
+  AM_LB_DOMAIN: "am.d2portal.co.uk"
+  DS_REPLICAS_CS: "2"
+  DS_REPLICAS_US: "2"
+  DS_REPLICAS_TS: "2"
+  DS_REPLICAS_RS: "2"
+  AM_REPLICAS: "2"
+  IDM_REPLICAS: "2"
+  AM_COOKIE_NAME: "iPlanetDirectoryPro"
+  SELF_REPL_TS: "false"
+  SELF_REPL_US: "false"
+  SELF_REPL_CS: "true"
+  ENV_TYPE: "SIT"
+  AM_VAULT_RUNTIME_PATH: "forgerock/data/sit/runtime/access-manager"
+  CS_K8S_SVC_URL: "forgerock-access-manager.forgerock.svc.cluster.local"
+  TS_K8S_SVC_URL: "forgerock-token-store.forgerock.svc.cluster.local"
+  US_K8S_SVC_URL: "forgerock-user-store.forgerock.svc.cluster.local"
+  USERSTORE_LOAD_SCHEMA: "true"
+  USERSTORE_LOAD_DSCONFIG: "true"
+  EXTERNAL_POLICY_STORE: "false"
+  AM_AMSTER_FILES: ''
+  AM_AUTH_TREES: 'authTrees_customers_login.sh\,authTrees_customers_register.sh\,authTrees_customers_stepup.sh'
+  AM_UPDATE_ALL_AUTHENTICATED_USERS_REALMS: ''
+  PODNAME_AM: "forgerock-access-manager"
+  PODNAME_CS: "forgerock-config-store"
+  PODNAME_US: "forgerock-user-store"
+  PODNAME_TS: "forgerock-token-store"
+  PODNAME_RS: "forgerock-repl-server"
+  PODNAME_IDM: "forgerock-idm"
+  SERVICENAME_AM: "forgerock-access-manager"
+  SERVICENAME_CS: "forgerock-config-store"
+  SERVICENAME_US: "forgerock-user-store"
+  SERVICENAME_TS: "forgerock-token-store"
+  SERVICENAME_RS: "forgerock-repl-server"
+  SERVICENAME_IDM: "forgerock-idm"
+  NAMESPACE: "forgerock"
+  IMAGE_PULL_SECRETS: "fr-nexus-docker"
+  CI_REGISTRY_URL: gcr.io/massive-dynamo-235117
+  JAVA_BASE_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/java-base
+  TOMCAT_BASE_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/tomcat-base
+  DS_BASE_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/ds-base
+  AM_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/openam
+  CFGSTORE_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/config-store
+  TOKENSTORE_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/token-store
+  USERSTORE_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/user-store
+  POLICYSTORE_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/policy-store
+  REPLSERVER_CONTAINER_IMAGE: ${CI_REGISTRY_URL}/repl-server
+  CLOUD_TYPE: sftp
+  STORAGE_BUCKET_PATH_JDK: gs://ready-to-integrate/bin/oracle/jdk
+  STORAGE_BUCKET_PATH_DS: gs://ready-to-integrate/bin/forgerock/directory-services
+  CFG_CUSTOM_JAVA: "false"
+  US_CUSTOM_JAVA: "false"
+  TS_CUSTOM_JAVA: "false"
+  RPL_CUSTOM_JAVA: "false"
+  PS_CUSTOM_JAVA: "false"
+  K8S_LOCATION: "aws"
+  FR_KUBE_CONFIG: "YXBpVmVyc2lvbjogdjENCmNsdXN0ZXJzOg0KLSBjbHVzdGVyOg0KICAgIGNlcnRpZmljYXRlLWF1dGhvcml0eS1kYXRhOiBMUzB0TFMxQ1JVZEpUaUJEUlZKVVNVWkpRMEZVUlMwdExTMHRDazFKU1VNMWVrTkRRV01yWjBGM1NVSkJaMGxDUVVSQlRrSm5hM0ZvYTJsSE9YY3dRa0ZSYzBaQlJFRldUVkpOZDBWUldVUldVVkZFUlhkd2NtUlhTbXdLWTIwMWJHUkhWbnBOUWpSWVJGUkplRTFVUlhoTlJFVjRUVVJyZUU5V2IxaEVWRTE0VFZSRmQwOUVSWGhOUkd0NFQxWnZkMFpVUlZSTlFrVkhRVEZWUlFwQmVFMUxZVE5XYVZwWVNuVmFXRkpzWTNwRFEwRlRTWGRFVVZsS1MyOWFTV2gyWTA1QlVVVkNRbEZCUkdkblJWQkJSRU5EUVZGdlEyZG5SVUpCUzBaMkNqSkhSbEY0VEdKalJYYzVZM2tyTUM5elQyTnNjRzEyV0ZkT1NWaGphM1ptZGpJNGQwWktUMHd5ZWpONVkycHlhWFF3YmxCVVUybGhjblYzTWs1NlZWWUtWMk51YjA5dk9IZzBibTVST0RGTFFYQTJaMUpPZWxwc1UyaENZaTlHV2k5c05YZHhaU3RJUVVKc2NWTnJTMFZsVTNoeFVURktMMWRJTUhoQ2MzbHpNQXBqVmpCWE9GWXJTMmxMWld4MWNYSlNVbVZDTTBKWFVqazVlbHByTUZKdlIyeFJZWGhKV2xrMk0ydHZRMHBQU2pkTWJWVmlkRzloYlZsTlFsWXlNVVV3Q21GbWRrWlVVR1kwWkZCMlpUTlpiMDV0ZEROa2VWQnZLekVyUjFwWlpWcGFPVEJXYTBneVVXcEZTakpzTDBZM1lYcDZkM1pWYzNoNllYUjVhMXBPU2pJS1NubFRSRWxTYURCa05sQTVkMVJPZVhSM2JtSlBhMjFxWkhnMFMwMVhkWFJyVHpOTGEyZHZXa3hyVERSMmNVSTBkMFJ0ZFVkdmFIUTBiR2hPWTFSaVpRcFNPRTFPYURObVkxVmlRM1JoYmpONVdUZE5RMEYzUlVGQllVNURUVVZCZDBSbldVUldVakJRUVZGSUwwSkJVVVJCWjB0clRVRTRSMEV4VldSRmQwVkNDaTkzVVVaTlFVMUNRV1k0ZDBoUldVUldVakJQUWtKWlJVWkhUbFpJT0dWcFVsQjNkVTVQYlU1VWNrRjBhVTR5YkdOTlJtdE5RVEJIUTFOeFIxTkpZak1LUkZGRlFrTjNWVUZCTkVsQ1FWRkJNVEpsZEdkemJGSnZWVTF3Ykd4alFWWkxkbUpYVTJaTVVrMTRWRmMwTm10NlF6aEZkRkpIUmxCWUswWjRPVFZKZFFwclpVaDFaR2sxTTJod1EwWmhaMFl5U2pad05HcFpZbGszWlVvdmJqazJObVkxZWl0cFRVMTFMMk5GWTNWRlNtTkNaMEZ5VFhKcGMwbHRZVWhCWlVSc0NqRlJZM2cwVFhwdFR6ZE5WRzQ0TjFwV2FrWllPWEZ2TmpJM1dETjZZVGxoUVdWaVdrbHdRbEpVVFRoM1pGQmhNMVF2VHpCb2RWTkRNMk5qU1Rrd056Y0thM2Q0TDJGWVUySnRlRlJDVWsxNlMwMWpjazFLTjNGaGNGUlBSMUJtU25CSUsyOVBUbWRuV0ZGeldUVlZhMlpwTkVWd2NVNDNSMXA0VDJ4SGNpdG9XZ3AxUVVsWFRISnNUMGxFYTFWVVJtb3ZlSGx5VldseFdXZEJVbGd5WmxOYWFqVnVkRXMwWms1eFJVaFFZbTk2TURsbGRqQmlkRXhUYkVWRVQzWXlWMmRYQ25KRE5tVktWak5QZFhsSVJtdDRhR1JsSzNRd1VFNXFkMVpRVFVrck9VSTBSVE5RTmdvdExTMHRMVVZPUkNCRFJWSlVTVVpKUTBGVVJTMHRMUzB0Q2c9PQ0KICAgIHNlcnZlcjogaHR0cHM6Ly9FNEI5Q0M1RDc1QUU2MDY4MkQ3MjFEM0U0RDBGMTJENi5ncjcuZXUtd2VzdC0yLmVrcy5hbWF6b25hd3MuY29tDQogIG5hbWU6IGFybjphd3M6ZWtzOmV1LXdlc3QtMjo3OTAwNTYxMTkzMTg6Y2x1c3Rlci9mci1mdWxsLWNsdXN0ZXIxDQpjb250ZXh0czoNCi0gY29udGV4dDoNCiAgICBjbHVzdGVyOiBhcm46YXdzOmVrczpldS13ZXN0LTI6NzkwMDU2MTE5MzE4OmNsdXN0ZXIvZnItZnVsbC1jbHVzdGVyMQ0KICAgIG5hbWVzcGFjZTogZm9yZ2Vyb2NrDQogICAgdXNlcjogYXJuOmF3czpla3M6ZXUtd2VzdC0yOjc5MDA1NjExOTMxODpjbHVzdGVyL2ZyLWZ1bGwtY2x1c3RlcjENCiAgbmFtZTogYXJuOmF3czpla3M6ZXUtd2VzdC0yOjc5MDA1NjExOTMxODpjbHVzdGVyL2ZyLWZ1bGwtY2x1c3RlcjENCmN1cnJlbnQtY29udGV4dDogYXJuOmF3czpla3M6ZXUtd2VzdC0yOjc5MDA1NjExOTMxODpjbHVzdGVyL2ZyLWZ1bGwtY2x1c3RlcjENCmtpbmQ6IENvbmZpZw0KcHJlZmVyZW5jZXM6IHt9DQp1c2VyczoNCi0gbmFtZTogYXJuOmF3czpla3M6ZXUtd2VzdC0yOjc5MDA1NjExOTMxODpjbHVzdGVyL2ZyLWZ1bGwtY2x1c3RlcjENCiAgdXNlcjoNCiAgICBleGVjOg0KICAgICAgYXBpVmVyc2lvbjogY2xpZW50LmF1dGhlbnRpY2F0aW9uLms4cy5pby92MWFscGhhMQ0KICAgICAgYXJnczoNCiAgICAgIC0gLS1yZWdpb24NCiAgICAgIC0gZXUtd2VzdC0yDQogICAgICAtIGVrcw0KICAgICAgLSBnZXQtdG9rZW4NCiAgICAgIC0gLS1jbHVzdGVyLW5hbWUNCiAgICAgIC0gZnItZnVsbC1jbHVzdGVyMQ0KICAgICAgY29tbWFuZDogYXdzDQogICAgICBlbnY6IG51bGwNCiAgICAgIHByb3ZpZGVDbHVzdGVySW5mbzogZmFsc2UNCg=="
+
+build-docker-images:
+  image: alpine:3.10
+  stage: build
+  when: manual
+  tags:
+    - docker
+  before_script:
+    - apk update && apk add docker-cli
+    - mkdir -p $HOME/.docker
+    - echo "$GCP_SERVICE_KEY" >> "$HOME/.docker/config.json"
+    - docker login -u _json_key --password-stdin https://gcr.io < $HOME/.docker/config.json
+    - docker info
+  script:
+    - echo "Building docker images..."
+    - docker build --build-arg CLOUD_TYPE=${CLOUD_TYPE} --build-arg STORAGE_BUCKET_PATH_JDK=${STORAGE_BUCKET_PATH_JDK} -t ${JAVA_BASE_CONTAINER_IMAGE} java-base/.
+    - docker push ${JAVA_BASE_CONTAINER_IMAGE}
+    - docker build --build-arg IMAGE_SRC=${JAVA_BASE_CONTAINER_IMAGE} -t ${TOMCAT_BASE_CONTAINER_IMAGE} tomcat-base/.
+    - docker push ${TOMCAT_BASE_CONTAINER_IMAGE}
+    - docker build --build-arg IMAGE_SRC=${JAVA_BASE_CONTAINER_IMAGE} --build-arg CLOUD_TYPE=${CLOUD_TYPE} --build-arg STORAGE_BUCKET_PATH_DS=${STORAGE_BUCKET_PATH_DS} -t ${DS_BASE_CONTAINER_IMAGE} ds-base/.
+    - docker push ${DS_BASE_CONTAINER_IMAGE}
+    - if [ "$EXTERNAL_POLICY_STORE" == "true" ]; then docker build --build-arg IMAGE_SRC=${DS_BASE_CONTAINER_IMAGE} -t ${POLICYSTORE_CONTAINER_IMAGE} policy-store/. && docker push ${POLICYSTORE_CONTAINER_IMAGE}; fi
+    - docker build --build-arg IMAGE_SRC=${DS_BASE_CONTAINER_IMAGE} -t ${CFGSTORE_CONTAINER_IMAGE} config-store/.
+    - docker push ${CFGSTORE_CONTAINER_IMAGE}
+    - docker build --build-arg IMAGE_SRC=${DS_BASE_CONTAINER_IMAGE} -t ${TOKENSTORE_CONTAINER_IMAGE} token-store/.
+    - docker push ${TOKENSTORE_CONTAINER_IMAGE}
+    - docker build --build-arg IMAGE_SRC=${DS_BASE_CONTAINER_IMAGE} -t ${USERSTORE_CONTAINER_IMAGE} user-store/.
+    - docker push ${USERSTORE_CONTAINER_IMAGE}
+    - docker build --build-arg IMAGE_SRC=${TOMCAT_BASE_CONTAINER_IMAGE} -t ${AM_CONTAINER_IMAGE} access-manager/.
+    - docker push ${AM_CONTAINER_IMAGE}
+    - echo "Docker images successfully pushed to registry"
+
+clear-down-environment:
+  image: alpine:3.10
+  stage: clean-up
+  when: manual
+  tags:
+    - docker
+  before_script:
+    - chmod 660 cicd-scripts/setup-required-tools.sh
+    - chmod +x cicd-scripts/setup-required-tools.sh
+    - cicd-scripts/setup-required-tools.sh
+  script:
+    - |
+      path_kubeconfig="$HOME/.kube/config"
+      echo "-> Cleaning Cluster" >&2
+      helm ls --all --short -n "${NAMESPACE}" | xargs helm uninstall -n "${NAMESPACE}"
+      kubectl --kubeconfig "${path_kubeconfig}" delete pvc,pv --all --force --grace-period=0 -n "${NAMESPACE}"
+      echo "Waiting 15 seconds for SVC to finish clearing up ..."
+      sleep 15
+      echo "-- Done" >&2
+      echo "" >&2
+
+setup-cluster-pre-req:
+  image: alpine:3.10
+  stage: cluster-pre-req
+  when: manual
+  tags:
+    - docker
+  before_script:
+    - chmod 660 cicd-scripts/setup-required-tools.sh
+    - chmod +x cicd-scripts/setup-required-tools.sh
+    - cicd-scripts/setup-required-tools.sh
+  script:
+    - |
+      path_gcp_registry_admin="/tmp/gcp-docker-registry-admin.json"
+      path_kubeconfig="$HOME/.kube/config"
+      echo ${GCP_REGISTRY_ADMIN} | base64 -d > ${path_gcp_registry_admin}
+      echo "-> Creating Namespace" >&2
+      kubectl --kubeconfig "${path_kubeconfig}" create ns "${NAMESPACE}"
+      echo "-- Done" >&2
+      echo "" >&2
+      echo "-> Creating GCP Image Pull Secret" >&2
+      #kubectl --kubeconfig "${path_kubeconfig}" delete secret "${IMAGE_PULL_SECRETS}" --namespace "${NAMESPACE}"
+      kubectl --kubeconfig "${path_kubeconfig}" create secret docker-registry "${IMAGE_PULL_SECRETS}" \
+        --docker-server=gcr.io --docker-username=_json_key --docker-email=taweh@midships.io \
+        --docker-password="$(cat ${path_gcp_registry_admin})" --namespace "${NAMESPACE}"
+      echo "-- Done" >&2
+      echo "" >&2
+
+deploy-all-fr-components:
+  image: alpine:3.10
+  stage: deploy-all-components
+  when: manual
+  tags:
+    - docker
+  before_script:
+    - chmod 660 cicd-scripts/setup-required-tools.sh
+    - chmod +x cicd-scripts/setup-required-tools.sh
+    - cicd-scripts/setup-required-tools.sh
+  script:
+    - chmod 660 cicd-scripts/deploy-all-components.sh
+    - chmod +x cicd-scripts/deploy-all-components.sh
+    - cicd-scripts/deploy-all-components.sh

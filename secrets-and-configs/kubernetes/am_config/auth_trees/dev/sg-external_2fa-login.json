@@ -1,0 +1,256 @@
+
+{
+  "origin": "05a1bc101cf7a81dea91512508742768",
+  "innernodes": {
+    "4685d8b6-607a-4b89-a6a4-4868ec10710b": {
+      "_id": "4685d8b6-607a-4b89-a6a4-4868ec10710b",
+      "messageKeys": {
+        "tmx-risk": "failure"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "bab5b79a-87f1-4dec-9498-e0b0b4bdd6fe": {
+      "_id": "bab5b79a-87f1-4dec-9498-e0b0b4bdd6fe",
+      "messageKeys": {
+        "tmx-risk": "high"
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "66be6ea4-2858-4b08-afe1-c92495574cd8": {
+      "_id": "66be6ea4-2858-4b08-afe1-c92495574cd8",
+      "messageKeys": {
+        "tmx-risk": "low",
+        "authLevel": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "31d14a50-5553-4e55-9226-54b69bbdae6f": {
+      "_id": "31d14a50-5553-4e55-9226-54b69bbdae6f",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "4685d8b6-607a-4b89-a6a4-4868ec10710b",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "tmx-risk-rating",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "741e7201-0967-4942-8564-d2fc904992c4": {
+      "_id": "741e7201-0967-4942-8564-d2fc904992c4",
+      "authLevelIncrement": 1,
+      "_type": {
+        "_id": "ModifyAuthLevelNode",
+        "name": "Modify Auth Level",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "8b84ca24-7a8c-4854-8369-fba4c8479b1f": {
+      "_id": "8b84ca24-7a8c-4854-8369-fba4c8479b1f",
+      "allUsersShouldRankedMedium": [
+        "softtoken001",
+        "hongyue001"
+      ],
+      "allUsersShouldRetry": [
+        "softoken001"
+      ],
+      "_type": {
+        "_id": "TMXRatingNode",
+        "name": "CIAM TMX Rating Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "HIGH",
+          "displayName": "HIGH"
+        },
+        {
+          "id": "MEDIUM",
+          "displayName": "MEDIUM"
+        },
+        {
+          "id": "LOW",
+          "displayName": "LOW"
+        },
+        {
+          "id": "RETRY",
+          "displayName": "RETRY"
+        },
+        {
+          "id": "FAILURE",
+          "displayName": "Failure"
+        }
+      ]
+    },
+    "bbfced67-aeed-45f1-a1cb-8e62491fb94c": {
+      "_id": "bbfced67-aeed-45f1-a1cb-8e62491fb94c",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "bab5b79a-87f1-4dec-9498-e0b0b4bdd6fe",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "tmx-risk-rating",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "e449c66e-9ec2-4eec-902e-b2ece89b9897": {
+      "_id": "e449c66e-9ec2-4eec-902e-b2ece89b9897",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "66be6ea4-2858-4b08-afe1-c92495574cd8",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "stage": "tmx-risk-rating",
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "scripts": {},
+  "emailTemplates": {},
+  "tree": {
+    "_id": "2fa-login",
+    "entryNodeId": "8b84ca24-7a8c-4854-8369-fba4c8479b1f",
+    "staticNodes": {
+      "startNode": {
+        "x": 50,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 1162,
+        "y": 334
+      },
+      "e301438c-0bd0-429c-ab0c-66126501069a": {
+        "x": 1253,
+        "y": 31
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "8b84ca24-7a8c-4854-8369-fba4c8479b1f": {
+        "displayName": "CIAM TMX Rating Node",
+        "nodeType": "TMXRatingNode",
+        "x": 166,
+        "y": 272,
+        "connections": {
+          "HIGH": "bbfced67-aeed-45f1-a1cb-8e62491fb94c",
+          "MEDIUM": "bbfced67-aeed-45f1-a1cb-8e62491fb94c",
+          "LOW": "741e7201-0967-4942-8564-d2fc904992c4",
+          "RETRY": "8b84ca24-7a8c-4854-8369-fba4c8479b1f",
+          "FAILURE": "31d14a50-5553-4e55-9226-54b69bbdae6f"
+        }
+      },
+      "741e7201-0967-4942-8564-d2fc904992c4": {
+        "displayName": "Modify Auth Level",
+        "nodeType": "ModifyAuthLevelNode",
+        "x": 457,
+        "y": 366,
+        "connections": {
+          "outcome": "e449c66e-9ec2-4eec-902e-b2ece89b9897"
+        }
+      },
+      "e449c66e-9ec2-4eec-902e-b2ece89b9897": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 667,
+        "y": 367,
+        "connections": {
+          "outcome": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        }
+      },
+      "bbfced67-aeed-45f1-a1cb-8e62491fb94c": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 545,
+        "y": 25,
+        "connections": {
+          "outcome": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      },
+      "31d14a50-5553-4e55-9226-54b69bbdae6f": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 549,
+        "y": 151,
+        "connections": {
+          "outcome": "e301438c-0bd0-429c-ab0c-66126501069a"
+        }
+      }
+    }
+  }
+}

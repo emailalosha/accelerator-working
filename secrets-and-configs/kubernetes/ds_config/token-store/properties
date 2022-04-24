@@ -1,0 +1,10 @@
+ldapPort=1389
+ldapsPort=1636
+httpPort=8080
+httpsPort=8443
+adminConnectorPort=4444
+replicationPort=8989
+rootUserDN='cn=Root User'
+replicationAdminUID=admin
+diskLowThreshold=10GB
+diskFullThreshold=5GB

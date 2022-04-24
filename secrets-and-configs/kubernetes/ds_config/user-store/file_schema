@@ -1,0 +1,70 @@
+# Reference:
+# JSON (1.3.6.1.4.1.36733.2.1.3.1)
+# String (1.3.6.1.4.1.1466.115.121.1.15)
+# Boolean (1.3.6.1.4.1.1466.115.121.1.7)
+# Integer (1.3.6.1.4.1.1466.115.121.1.27)
+# Date/Time (1.3.6.1.4.1.1466.115.121.1.24)
+# OCTET STRING (1.3.6.1.4.1.1466.115.121.1.40)
+#
+dn: cn=schema
+objectClass: top
+objectClass: ldapSubentry
+objectClass: subschema
+cn: schema
+#
+# Object Class 'pbUserExtension' and its attributes
+attributeTypes: ( priveUserId-oid
+  NAME 'priveUserId'
+  DESC 'Prudential customer attribute'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE
+  X-SCHEMA-FILE '99-user.ldif' )
+attributeTypes: ( abakaUserId-oid
+  NAME 'abakaUserId'
+  DESC 'Prudential customer attribute'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE
+  X-SCHEMA-FILE '99-user.ldif' )
+attributeTypes: ( pulseUserId-oid
+  NAME 'pulseUserId'
+  DESC 'Prudential customer attribute'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE
+  X-SCHEMA-FILE '99-user.ldif' )
+attributeTypes: ( abakaUserStatus-oid
+  NAME 'abakaUserStatus'
+  DESC 'Prudential customer attribute'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE
+  X-SCHEMA-FILE '99-user.ldif' )
+attributeTypes: ( priveUserStatus-oid
+  NAME 'priveUserStatus'
+  DESC 'Prudential customer attribute'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE
+  X-SCHEMA-FILE '99-user.ldif' )
+attributeTypes: ( wealthId-oid
+  NAME 'wealthId'
+  DESC 'Prudential Wealth ID'
+  EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch
+  SYNTAX 1.3.6.1.4.1.1466.115.121.1.15
+  SINGLE-VALUE
+  X-SCHEMA-FILE '99-user.ldif' )
+objectClasses: ( pUserExtension-oid
+  NAME 'pUserExtension'
+  DESC 'Additional attributes for a Prudential User'
+  SUP top
+  AUXILIARY
+  MAY ( priveUserId $ abakaUserId $ pulseUserId $ abakaUserStatus $ priveUserStatus $ wealthId )
+  X-SCHEMA-FILE '99-user.ldif' )

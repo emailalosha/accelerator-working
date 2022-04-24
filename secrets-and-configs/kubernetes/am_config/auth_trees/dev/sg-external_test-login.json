@@ -1,0 +1,135 @@
+
+{
+  "origin": "05a1bc101cf7a81dea91512508742768",
+  "innernodes": {
+    "e1234d79-24af-4a24-9f60-10771aec84e8": {
+      "_id": "e1234d79-24af-4a24-9f60-10771aec84e8",
+      "_type": {
+        "_id": "UsernameCollectorNode",
+        "name": "Username Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "cdf35ee7-e514-48eb-8237-cf609aae0465": {
+      "_id": "cdf35ee7-e514-48eb-8237-cf609aae0465",
+      "hiddenCollectorId": "EncryptedPassword",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "42edb4b1-c9fc-4c76-876a-9689c6a61b39": {
+      "_id": "42edb4b1-c9fc-4c76-876a-9689c6a61b39",
+      "hiddenCollectorId": "SecurityNonce",
+      "_type": {
+        "_id": "HiddenValueCollectorNode",
+        "name": "Hidden Value Collector",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    },
+    "4870469b-06db-4eeb-8708-a262550bb625": {
+      "_id": "4870469b-06db-4eeb-8708-a262550bb625",
+      "messageKeys": {
+        "rsa-key": ""
+      },
+      "_type": {
+        "_id": "ShowMessage",
+        "name": "CIAM Show Message",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "nodes": {
+    "bf652e5c-acfb-41f7-929d-9cc5c3821dd2": {
+      "_id": "bf652e5c-acfb-41f7-929d-9cc5c3821dd2",
+      "pageHeader": {},
+      "pageDescription": {},
+      "nodes": [
+        {
+          "_id": "e1234d79-24af-4a24-9f60-10771aec84e8",
+          "nodeType": "UsernameCollectorNode",
+          "displayName": "Username Collector"
+        },
+        {
+          "_id": "cdf35ee7-e514-48eb-8237-cf609aae0465",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "42edb4b1-c9fc-4c76-876a-9689c6a61b39",
+          "nodeType": "HiddenValueCollectorNode",
+          "displayName": "Hidden Value Collector"
+        },
+        {
+          "_id": "4870469b-06db-4eeb-8708-a262550bb625",
+          "nodeType": "ShowMessage",
+          "displayName": "CIAM Show Message"
+        }
+      ],
+      "_type": {
+        "_id": "PageNode",
+        "name": "Page Node",
+        "collection": true
+      },
+      "_outcomes": [
+        {
+          "id": "outcome",
+          "displayName": "Outcome"
+        }
+      ]
+    }
+  },
+  "scripts": {},
+  "emailTemplates": {},
+  "tree": {
+    "_id": "test-login",
+    "entryNodeId": "bf652e5c-acfb-41f7-929d-9cc5c3821dd2",
+    "staticNodes": {
+      "startNode": {
+        "x": 50,
+        "y": 25
+      },
+      "70e691a5-1e33-4ac3-a356-e7b6d60d92e0": {
+        "x": 845,
+        "y": 174
+      }
+    },
+    "uiConfig": {},
+    "nodes": {
+      "bf652e5c-acfb-41f7-929d-9cc5c3821dd2": {
+        "displayName": "Page Node",
+        "nodeType": "PageNode",
+        "x": 349,
+        "y": 93.59375,
+        "connections": {
+          "outcome": "70e691a5-1e33-4ac3-a356-e7b6d60d92e0"
+        }
+      }
+    }
+  }
+}

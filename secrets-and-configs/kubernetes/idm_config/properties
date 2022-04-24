@@ -1,0 +1,3 @@
+dsBindDN='cn=Root User'
+dsPort=1636
+httpsPort=8443

@@ -1,0 +1,22 @@
+amHttpPort=8080
+amHttpsPort=8443
+cfgStoreDirMgr='uid=am-config,ou=admins,ou=am-config'
+cfgStoreRootSuffix='ou=am-config' cfgStore='dirServer'
+cfgStoreAdminPort=4445
+cfgStoreLdapsPort=1637
+cfgStoreHttpPort=8081
+cfgStoreLdapPort=1390
+cfgStoreSsl='SIMPLE'
+userStoreDirMgr='uid=am-identity-bind-account,ou=admins,ou=users'
+userStoreRootSuffix='ou=users'
+userStoreType='LDAPv3ForOpenDS'
+userStoreAdminPort=4444
+userStorePort=1636
+userStoreHttpsPort=8443
+userStoreSsl='SSL'
+ctsDirMgr='uid=openam_cts,ou=admins,ou=famrecords,ou=openam-session,ou=tokens'
+ctsRootSuffix='ou=tokens'
+lbSiteName='ClientSite'
+ctsPort=1636
+cfgStoreHttpsPort=8444
+ctsHttpsPort=8443

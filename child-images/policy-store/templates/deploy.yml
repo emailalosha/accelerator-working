@@ -1,0 +1,121 @@
+#
+# Legal Notice: Installation and use of this script is subject to 
+# a license agreement with Midships Limited (a company registered 
+# in England, under company registration number: 11324587).
+# This script cannot be modified or shared with another organisation 
+# unless approved in writing by Midships Limited.
+# You as a user of this script must review, accept and comply with the 
+# license terms of each downloaded/installed package that is referenced 
+# by this script. By proceeding with the installation, you are accepting 
+# the license terms of each package, and acknowledging that your use of 
+# each package will be subject to its respective license terms.
+#=======================================================================
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ .Values.policystore.pod_name | quote }}
+  # Should NOT include digits
+  namespace: {{ .Values.policystore.namespace }}
+spec:
+  serviceName: {{ .Values.policystore.pod_name | quote }}
+  replicas: {{ .Values.policystore.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.policystore.pod_name | quote }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.policystore.pod_name | quote }}
+    spec:
+      affinity:
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                  - key: "app"
+                    operator: In
+                    values:
+                    - {{ .Values.policystore.pod_name | quote }}
+              topologyKey: "kubernetes.io/hostname"
+      securityContext:
+        runAsUser: 10002
+        runAsGroup: 10002
+        fsGroup: 10002
+      containers:
+      - name: {{ .Values.policystore.pod_name | quote }}
+        image: {{ .Values.policystore.image }}
+        imagePullPolicy: Always
+        resources:
+          limits:
+            memory: 1Gi
+          requests:
+            memory: 1Gi
+        readinessProbe:
+          httpGet:
+            port: 8444
+            path: /alive
+            scheme: HTTPS
+          initialDelaySeconds: 40 # how long to wait before checking
+          periodSeconds: 5 # how long to wait between checks
+          successThreshold: 2 # how many successes to hit before accepting
+          failureThreshold: 10 # how many failures to accept before failing
+          timeoutSeconds: 5 # how long to wait for a response
+        env:
+        - name: POD_BASENAME
+          value: {{ .Values.policystore.pod_name | quote }}
+        - name: POD_SERVICE_NAME
+          value: {{ .Values.policystore.service_name | quote }}
+        - name: DS_BASE_DN
+          value: "ou=am-config"
+        - name: ENV_TYPE
+          value: "{{ .Values.policystore.env_type }}"
+        - name: USE_CUSTOM_JAVA_PROPS
+          value: "{{ .Values.policystore.use_javaProps }}"
+        - name: SELF_REPLICATE
+          value: "{{ .Values.policystore.self_replicate }}"
+        - name: VAULT_BASE_URL
+          value: {{ .Values.vault.url }}
+        - name: VAULT_CLIENT_PATH
+          value: {{ .Values.vault.ps_path }}
+        - name: VAULT_TOKEN
+          value: {{ .Values.vault.token }}
+        - name: POD_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        ports:
+        - name: ldaps
+          containerPort: 1636
+          protocol: TCP
+        - name: admin
+          containerPort: 4444
+          protocol: TCP
+        - name: replication
+          containerPort: 8989
+          protocol: TCP
+        - name: https
+          containerPort: 8443
+          protocol: TCP
+        volumeMounts:
+        - mountPath: "/opt/ds/app"
+          name: pvc
+      imagePullSecrets:
+      - name: fr-nexus-docker
+      volumes:
+      - name: pvc
+        persistentVolumeClaim:
+          claimName: pvc
+  volumeClaimTemplates:
+    - metadata:
+        name: pvc
+        annotations:
+          pv.beta.kubernetes.io/gid: "0"
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 20Gi

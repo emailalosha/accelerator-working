@@ -1,0 +1,3 @@
+[allowlist]
+    description = "pattern for allowlist"
+    regexes = ['pwd', 'Pwd','password','Password']

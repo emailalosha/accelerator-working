@@ -1,0 +1,27 @@
+#
+# Legal Notice: Installation and use of this script is subject to 
+# a license agreement with Midships Limited (a company registered 
+# in England, under company registration number: 11324587).
+# This script cannot be modified or shared with another organisation 
+# unless approved in writing by Midships Limited.
+# You as a user of this script must review, accept and comply with the 
+# license terms of each downloaded/installed package that is referenced 
+# by this script. By proceeding with the installation, you are accepting 
+# the license terms of each package, and acknowledging that your use of 
+# each package will be subject to its respective license terms.
+#=======================================================================
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.am.pod_name | default "forgerock-access-manager" | quote }}
+  namespace: {{ .Values.secrets.namespace | quote }}
+data:
+  {{- $amsterGlobalPath := printf "am_config/amster/%s/global/*" .Values.env_name -}}
+  {{- $amsterSgExternalPath := printf "am_config/amster/%s/sg-external/*" .Values.env_name -}}
+  {{- $amsterSgInternalPath := printf "am_config/amster/%s/sg-internal/*" .Values.env_name -}}
+  {{- $authTreePath := printf "am_config/auth_trees/%s/*" .Values.env_name -}}
+  {{- (.Files.Glob "am_config/properties").AsConfig | nindent 2 }}
+  {{- (.Files.Glob $amsterGlobalPath).AsConfig | nindent 2 }}
+  {{- (.Files.Glob $amsterSgExternalPath).AsConfig | nindent 2 }}
+  {{- (.Files.Glob $amsterSgInternalPath).AsConfig | nindent 2 }}
+  {{- (.Files.Glob $authTreePath).AsConfig | nindent 2 }}

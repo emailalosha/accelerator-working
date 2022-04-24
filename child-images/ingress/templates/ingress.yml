@@ -1,0 +1,44 @@
+#
+# Legal Notice: Installation and use of this script is subject to 
+# a license agreement with Midships Limited (a company registered 
+# in England, under company registration number: 11324587).
+# This script cannot be modified or shared with another organisation 
+# unless approved in writing by Midships Limited.
+# You as a user of this script must review, accept and comply with the 
+# license terms of each downloaded/installed package that is referenced 
+# by this script. By proceeding with the installation, you are accepting 
+# the license terms of each package, and acknowledging that your use of 
+# each package will be subject to its respective license terms.
+#=======================================================================
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: am-ingress-{{ .Values.am.namespace }}
+  namespace: {{ .Values.am.namespace }}
+  annotations:
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
+      { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/inbound-cidrs: 10.0.0.0/8, 172.29.6.0/24
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/tags: environment={{ .Values.am.env_type }}
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/backend-protocol: HTTPS    
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.certificate_arn }}
+    kubernetes.io/ingress.class: alb
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /retail/api/v4/soft-tokens/*
+            backend:
+              serviceName: ng-soft-token-sg
+              servicePort: 443
+          - path: /retail/api/v4/registrations/*
+            backend:
+              serviceName: ng-registration-sg
+              servicePort: 443
+          - path: /*
+            backend:
+              serviceName: {{ .Values.am.service_name }}-lb
+              servicePort: 8443
